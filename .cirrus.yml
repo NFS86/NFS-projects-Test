@@ -38,7 +38,7 @@ task:
       - git clone --depth=1 https://github.com/c3eru/device_tree -b 11.0 device/xiaomi/juice
       - git clone --depth=1 https://github.com/c3eru/vendor_tree --single-branch -b 11.0 vendor/xiaomi/juice
       - git clone --depth=1 https://github.com/c3eru/android_kernel_xiaomi_bengal --single-branch -b main kernel/xiaomi/juice
-      - git clone --depth=1 https://github.com/kdrag0n -b master prebuilts/clang/host/linux-x86/clang-proton
+      - git clone --depth=1 https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/clang-proton
       - echo "============================"
       - echo "Sync Completed!"
       - echo "============================"
@@ -58,9 +58,9 @@ task:
       - lunch aosp_juice-userdebug
       - export TZ=Asia/Jakarta
       - mka bacon -jX
-      - sleep 90m
-      - kill %1
-      - ccache -s
+ #     - sleep 90m
+ #     - kill %1
+ #     - ccache -s
       - echo "============================"
       - echo "Build Completed!"
       - echo "============================"
