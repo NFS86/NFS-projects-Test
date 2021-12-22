@@ -57,7 +57,7 @@ task:
       - source build/envsetup.sh
       - lunch aosp_juice-userdebug
       - export TZ=Asia/Jakarta
-      - mka bacon -jX
+      - mka bacon
  #     - sleep 90m
  #     - kill %1
  #     - ccache -s
