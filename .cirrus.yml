@@ -21,7 +21,7 @@ task:
        - cd /tmp
        - time tar xf ccache.tar.gz
        - cd /tmp
-  
+ 
   Storage-Checker_background_script:
       - df -h
       - lsblk
