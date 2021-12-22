@@ -49,15 +49,15 @@ task:
       - export USE_CCACHE=1
       - ccache -M 50G
       - ccache -o compression=true
-      - ccache -z
       - source build/envsetup.sh
       - lunch spark_rosy-userdebug
+      - export ALLOW_MISSING_DEPENDENCIES=true
       - export TZ=Asia/Jakarta
       - export BUILD_USER=finix
       - export BUILD_HOST=rosy
       - export BUILD_USERNAME=finix
       - export BUILD_HOSTNAME=rosy
-      - mka bacon -j8
+      - mka bacon
  #     - sleep 90m
  #     - kill %1
  #     - ccache -s
