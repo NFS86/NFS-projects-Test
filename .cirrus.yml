@@ -2,7 +2,7 @@ task:
   name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 480m  
   container:
-      image: 20020214/lynzx:latest
+      image: c3eru/prjkt:latest
       cpu: 8
       memory: 32G
         
@@ -15,8 +15,8 @@ task:
        - DEBIAN_FRONTEND=noninteractive
        - sudo apt install python3 -y
        - sudo ln -sf /usr/bin/python3 /usr/bin/python
-       - git config --global user.name "lynnnnzx"
-       - git config --global user.email "rifqikanekii140202@gmail.com"
+       - git config --global user.name "c3eru"
+       - git config --global user.email "yyprjk@gmail.com"
        - mkdir -p /tmp/ccache
        - cd /tmp
        - time tar xf ccache.tar.gz
@@ -32,13 +32,13 @@ task:
       - echo "Syncing The Sources..."
       - echo "============================"
       - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/NusantaraProject-ROM/android_manifest -b 11 -g default,-device,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelExperience/manifest -b eleven-plus -g default,-device,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       # DT/VT/KT/TC
-      - git clone --depth=1 https://github.com/lynnnnzx/device_xiaomi_juice -b nad-juice device/xiaomi/juice
-      - git clone --depth=1 https://github.com/lynnnnzx/prebuilt_vendor_juice --single-branch -b A11 vendor/xiaomi/juice
-      - git clone --depth=1 https://github.com/lynnnnzx/android_kernel_xiaomi_bengal --single-branch -b test kernel/xiaomi/juice
-      - git clone --depth=1 https://gitlab.com/AnggaR96s/clang-gengkapak -b main prebuilts/clang/host/linux-x86/clang-gengkapak
+      - git clone --depth=1 https://github.com/c3eru/device_tree -b 11.0 device/xiaomi/juice
+      - git clone --depth=1 https://github.com/c3eru/vendor_tree --single-branch -b 11.0 vendor/xiaomi/juice
+      - git clone --depth=1 https://github.com/c3eru/android_kernel_xiaomi_bengal --single-branch -b main kernel/xiaomi/juice
+      - git clone --depth=1 https://github.com/kdrag0n -b master prebuilts/clang/host/linux-x86/clang-proton
       - echo "============================"
       - echo "Sync Completed!"
       - echo "============================"
@@ -55,10 +55,9 @@ task:
       - ccache -o compression=true
       - ccache -z
       - source build/envsetup.sh
-      - lunch nad_juice-userdebug
+      - lunch aosp_juice-userdebug
       - export TZ=Asia/Jakarta
-#      - make nad -j$(nproc --all)
-      - make nad -j$(nproc --all) &
+      - mka bacon -jX
       - sleep 90m
       - kill %1
       - ccache -s
@@ -70,7 +69,7 @@ task:
       - echo "============================"
       - echo "Uploading the Build...."
       - echo "============================"
-      - curl --upload-file  /tmp/rom/out/target/product/juice/ Nusantara*.zip https://transfer.sh
+      - curl --upload-file  /tmp/rom/out/target/product/juice/PixelExperience*.zip https://transfer.sh
       - ./ziping.sh
       - cd /tmp
       - echo " "
