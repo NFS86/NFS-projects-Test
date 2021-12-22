@@ -15,8 +15,8 @@ task:
        - DEBIAN_FRONTEND=noninteractive
        - sudo apt install python3 -y
        - sudo ln -sf /usr/bin/python3 /usr/bin/python
-       - git config --global user.name "c3eru"
-       - git config --global user.email "yyprjk@gmail.com"
+       - git config --global user.name "NFS86"
+       - git config --global user.email "jarbull86@gmail.com"
        - mkdir -p /tmp/ccache
        - cd /tmp
        - time tar xf ccache.tar.gz
@@ -32,13 +32,9 @@ task:
       - echo "Syncing The Sources..."
       - echo "============================"
       - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelExperience/manifest -b eleven-plus -g default,-device,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-device,-mips,-darwin,-notdefault
+      - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      # DT/VT/KT/TC
-      - git clone --depth=1 https://github.com/c3eru/device_tree -b 11.0 device/xiaomi/juice
-      - git clone --depth=1 https://github.com/c3eru/vendor_tree --single-branch -b 11.0 vendor/xiaomi/juice
-      - git clone --depth=1 https://github.com/c3eru/android_kernel_xiaomi_bengal --single-branch -b main kernel/xiaomi/juice
-      - git clone --depth=1 https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/clang-proton
       - echo "============================"
       - echo "Sync Completed!"
       - echo "============================"
@@ -55,9 +51,13 @@ task:
       - ccache -o compression=true
       - ccache -z
       - source build/envsetup.sh
-      - lunch aosp_juice-userdebug
+      - lunch spark_rosy-userdebug
       - export TZ=Asia/Jakarta
-      - mka bacon
+      - export BUILD_USER=finix
+      - export BUILD_HOST=rosy
+      - export BUILD_USERNAME=finix
+      - export BUILD_HOSTNAME=rosy
+      - mka bacon -j8
  #     - sleep 90m
  #     - kill %1
  #     - ccache -s
@@ -69,7 +69,7 @@ task:
       - echo "============================"
       - echo "Uploading the Build...."
       - echo "============================"
-      - curl --upload-file  /tmp/rom/out/target/product/juice/PixelExperience*.zip https://transfer.sh
+      - curl --upload-file  /tmp/rom/out/target/product/juice/*rosy*.zip https://transfer.sh
       - ./ziping.sh
       - cd /tmp
       - echo " "
