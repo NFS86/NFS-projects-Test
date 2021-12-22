@@ -1,6 +1,6 @@
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 480m  
+  timeout_in: 240m
   container:
       image: c3eru/prjkt:latest
       cpu: 8
@@ -19,6 +19,7 @@ task:
        - git config --global user.email "jarbull86@gmail.com"
        - mkdir -p /tmp/ccache
        - cd /tmp
+       - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s50
        - time tar xf ccache.tar.gz
        - cd /tmp
  
@@ -49,6 +50,7 @@ task:
       - export USE_CCACHE=1
       - ccache -M 50G
       - ccache -o compression=true
+      - ccache -z
       - source build/envsetup.sh
       - lunch spark_rosy-userdebug
       - export ALLOW_MISSING_DEPENDENCIES=true
