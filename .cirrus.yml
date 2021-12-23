@@ -1,6 +1,6 @@
 env:
     CIRRUS_CLONE_DEPTH: 1
-    CIRRUS_WORKING_DIR: "/tmp/ci"
+    CIRRUS_WORKING_DIR: "/tmp"
 
 task:
   name: "Project Testing..."
@@ -17,12 +17,10 @@ task:
        - cat /etc/os*
        - env
        - cd /tmp
+       - export CCACHE_DIR=/tmp/ccache
        - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s50
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
-
-  Monitor_script:
-       - export CCACHE_DIR=/tmp/ccache
        - ccache -s
        - top -b -i -n 1
 
