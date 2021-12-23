@@ -1,5 +1,5 @@
 env:
-    rclone_config: "ENCRYPTED[06Qn4cztspLgXCgYIARAAGAYSNwF-L9IrdngNEGaXNP6xScHTg7mjIFNFRJ4oryVw0ZXQbvl18ExZysjSsJmlExwvZedSgjtrrEE]"
+    rclone_config: "https://github.com/AnGgIt88/GDIndex/blob/master/worker/dist/worker.js"
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
