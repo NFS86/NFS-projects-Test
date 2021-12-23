@@ -26,6 +26,8 @@ task:
        - free -h
        - nproc
        - cat /etc/os*
+       - cd /tmp/ccache
+       - export CCACHE_DIR=/tmp/ccache
        - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s50
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
