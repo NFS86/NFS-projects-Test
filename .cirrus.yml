@@ -9,6 +9,10 @@ task:
       image: anggit86/dev:latest
       cpu: 8
       memory: 32G
+      volumes:
+          - /tmp/rom:/tmp/rom
+          - /tmp/ccache:/tmp/ccache
+          - /tmp/ccache/ccache.conf:/tmp/ccache/ccache.conf
 
   Environment_script:
        - env
