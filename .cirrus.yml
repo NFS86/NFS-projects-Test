@@ -23,17 +23,19 @@ task:
        - nproc
        - cat /etc/os*
        - export CCACHE_DIR=/tmp/ccache
+       - export CCACHE_EXEC=$(which ccache)
+       - export USE_CCACHE=1
+       - ccache -M 20G
        - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s100
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
- 
-  Ccache_Check_script:
-      - export CCACHE_DIR=/tmp/ccache
-      - ccache -s
-      - top -b -i -n 1
+       - ccache -z
+       - export CCACHE_DIR=/tmp/ccache
+       - ccache -s
+       - top -b -i -n 1
 
   Sync_script:
-      - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+       - cd /tmp/rom
+       - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-mips,-darwin,-notdefault
+       - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
+       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
