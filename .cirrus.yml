@@ -3,8 +3,8 @@ task:
   timeout_in: 4h
   container:
       image: anggit86/dev:latest
-      cpu: 24
-      memory: 120G
+      cpu: 8
+      memory: 32G
         
   Setup_script:
        - export DEBIAN_FRONTEND=noninteractive
