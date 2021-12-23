@@ -25,7 +25,6 @@ task:
        - export CCACHE_DIR=/tmp/ccache
        - export CCACHE_EXEC=$(which ccache)
        - export USE_CCACHE=1
-       - ccache -M 20G
        - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s100
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
