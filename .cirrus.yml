@@ -24,3 +24,7 @@ task:
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
  
+  Ccache_Check_background_script:
+      - export CCACHE_DIR=/tmp/ccache
+      - ccache -s
+      - top -b -i -n 1
