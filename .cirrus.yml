@@ -1,3 +1,7 @@
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    BUILD_HOSTNAME: "cirrus-ci.org"
+
 task:
   name: "Project Testing..."
   timeout_in: 4h
@@ -5,7 +9,10 @@ task:
       image: anggit86/dev:latest
       cpu: 8
       memory: 32G
-        
+
+  Environment_script:
+       - env
+
   Setup_script:
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
@@ -19,7 +26,6 @@ task:
        - free -h
        - nproc
        - cat /etc/os*
-       - cd /tmp
        - time aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz -x16 -s50
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
