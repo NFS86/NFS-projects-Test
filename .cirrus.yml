@@ -1,8 +1,5 @@
-env:
-    rclone_config: "https://github.com/AnGgIt88/GDIndex/blob/master/worker/dist/worker.js"
-
 task:
-  name: "Setting Up, Syncing, Building and Uploading..."
+  name: "Project Testing..."
   timeout_in: 240m
   container:
       image: anggit86/dev:latest
@@ -11,13 +8,11 @@ task:
         
   Build-Env-Setup_background_script:
        - export DEBIAN_FRONTEND=noninteractive
-       - apt update
-       - apt install sudo
        - mkdir -p ~/.config/rclone
+       - wget https://raw.githubusercontent.com/AnGgIt88/GDIndex/master/worker/dist/worker.js
+       - cp -fpr worker.js ~/.config/rclone/rclone.conf
        - echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
        - DEBIAN_FRONTEND=noninteractive
-       - sudo apt install python3 -y
-       - sudo ln -sf /usr/bin/python3 /usr/bin/python
        - git config --global user.name "NFS86"
        - git config --global user.email "jarbull86@gmail.com"
        - df -h
@@ -29,62 +24,3 @@ task:
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
  
-  Checker_background_script:
-      - export CCACHE_DIR=/tmp/ccache
-      - ccache -s
-      - top -b -i -n 1
-  
-  Sync_script:
-      - echo "============================"
-      - echo "Syncing The Sources..."
-      - echo "============================"
-      - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-device,-mips,-darwin,-notdefault
-      - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - echo "============================"
-      - echo "Sync Completed!"
-      - echo "============================"
-
-  Build_script:
-      - echo "============================"
-      - echo "Starting the Build..."
-      - echo "============================"
-      - cd /tmp/rom
-      - source build/envsetup.sh
-      - lunch spark_rosy-userdebug
-      - export CCACHE_DIR=/tmp/ccache
-      - export CCACHE_EXEC=$(which ccache)
-      - export USE_CCACHE=1
-      - ccache -M 20G
-      - ccache -o compression=true
-      - ccache -z
-      - export ALLOW_MISSING_DEPENDENCIES=true
-      - export TZ=Asia/Jakarta
-      - export BUILD_USER=finix
-      - export BUILD_HOST=rosy
-      - export BUILD_USERNAME=finix
-      - export BUILD_HOSTNAME=rosy
-      - make api-stubs-docs || echo no problem
-      - make system-api-stubs-docs || echo no problem
-      - make test-api-stubs-docs || echo no problem
-      - mka bacon -j8
-      - ccache -s
- #     - sleep 90m
- #     - kill %1
- #     - ccache -s
-      - echo "============================"
-      - echo "Build Completed!"
-      - echo "============================"
- 
-  Upload_script:
-      - echo "============================"
-      - echo "Uploading the Build...."
-      - echo "============================"
-      - curl --upload-file  /tmp/rom/out/target/product/juice/*rosy*.zip https://transfer.sh
-      - ./ziping.sh
-      - cd /tmp
-      - echo " "
-      - echo "============================"
-      - echo "Build Uploaded Successfully!"
-      - echo "============================"
