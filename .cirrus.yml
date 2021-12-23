@@ -1,12 +1,12 @@
 task:
   name: "Project Testing..."
-  timeout_in: 240m
+  timeout_in: 4h
   container:
       image: anggit86/dev:latest
-      cpu: 8
-      memory: 32G
+      cpu: 24
+      memory: 120G
         
-  Build-Env-Setup_background_script:
+  Setup_script:
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - wget https://raw.githubusercontent.com/AnGgIt88/GDIndex/master/worker/dist/worker.js
@@ -24,7 +24,7 @@ task:
        - time tar xf ccache.tar.gz
        - rm -rf ccache.tar.gz
  
-  Ccache_Check_background_script:
+  Ccache_Check_script:
       - export CCACHE_DIR=/tmp/ccache
       - ccache -s
       - top -b -i -n 1
