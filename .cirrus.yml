@@ -14,7 +14,7 @@ task:
       memory: 32G
         
   Build-Env-Setup_background_script:
-       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Setup Build"
+       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building SparkOS started</code>%0A==========================="
        - export DEBIAN_FRONTEND=noninteractive
        - export ALLOW_MISSING_DEPENDENCIES=true
        - apt update
@@ -38,18 +38,13 @@ task:
       - ls -l -a -h
   
   Sync_script:
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="============================================"
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build Baru Terdeteksi!"
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="============================================"
       - echo "============================"
       - echo "Menyinkronkan Sumber..."
       - echo "============================"
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Mulai sinkronisasi Sumber..."
       - cd /tmp/rom
       - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-device,-mips,-darwin,-notdefault
       - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Sinkronisasi Selesai!"
       - echo "============================"
       - echo "Sinkronisasi Selesai!"
       - echo "============================"
@@ -58,8 +53,8 @@ task:
       - echo "============================"
       - echo "Starting the Build..."
       - echo "============================"
-#      - ./collect.sh
-      - ./final.sh
+      - ./collect.sh
+#      - ./final.sh
       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip) Completed!"
       - echo "============================"
       - echo "Build Completed!"
@@ -70,7 +65,7 @@ task:
       - echo "Mengunggah Build...."
       - echo "============================"
       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Uploading Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip)"
-#      - rclone copy /tmp/rom/out/target/product/rosy/Spark*.zip anggitjav:rosy -P
+      - rclone copy /tmp/rom/out/target/product/rosy/Spark*.zip anggitjav:rosy -P
       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip) Uploaded Successfully!"
       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Download link http://anu.inok189.workers.dev/rosy/$(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip)"
       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Compres ccache"
