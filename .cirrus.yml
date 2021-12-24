@@ -4,7 +4,7 @@ env:
 
 task:
   name: "Project Testing..."
-  timeout_in: 4h
+  timeout_in: 2h
   container:
       image: anggit86/dev:latest
       cpu: 8
@@ -41,5 +41,5 @@ task:
        - export TZ=Asia/Jakarta
        - export BUILD_USERNAME=finix
        - export BUILD_HOSTNAME=rosy
-       - export WITH_GAPPS=true
+       - export WITH_GAPPS=false
        - mka bacon -j8
