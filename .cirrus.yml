@@ -41,4 +41,5 @@ task:
        - export TZ=Asia/Jakarta
        - export BUILD_USERNAME=finix
        - export BUILD_HOSTNAME=rosy
-       - mka bacon -j30
+       - export WITH_GAPPS=true
+       - mka bacon -j8
