@@ -5,6 +5,7 @@ env:
 task:
   name: "Project Testing..."
   timeout_in: 2h
+  timeout: 2h
   container:
       image: anggit86/dev:latest
       cpu: 8
@@ -18,9 +19,9 @@ task:
        - env
        - cd /tmp
        - export CCACHE_DIR=/tmp/ccache
-       - aria2c https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz
-       - tar xf ccache.tar.gz
-       - rm -rf ccache.tar.gz
+       - aria2c https://github.com/ccache/ccache/releases/download/v4.5.1/ccache-4.5.1.tar.gz
+       - tar xf ccache-4.5.1.tar.gz
+       - rm -rf ccache-4.5.1.tar.gz
        - ccache -s
        - top -b -i -n 1
 
