@@ -7,76 +7,28 @@ env:
     
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 480m  
+  timeout_in: 3h
+  timeout: 3h
   container:
       image: anggit86/dev:latest
       cpu: 8
       memory: 32G
         
   Build-Env-Setup_background_script:
-#       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building SparkOS started</code>%0A==========================="
-       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building ccache stage 1</code>%0A==========================="
-#       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building ccache stage 2</code>%0A==========================="
-#       - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building ccache stage 3</code>%0A==========================="
-       - export DEBIAN_FRONTEND=noninteractive
-       - export ALLOW_MISSING_DEPENDENCIES=true
-       - apt update
-       - apt install sudo
-       - mkdir -p ~/.config/rclone
-       - echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
-       - DEBIAN_FRONTEND=noninteractive
-       - sudo apt install python3 -y
-       - sudo ln -sf /usr/bin/python3 /usr/bin/python
-       - git config --global user.name "NFS86"
-       - git config --global user.email "jarbull86@gmail.com"
-       - mkdir -p /tmp/ccache
-       - rclone copy anggitjav:Spark/ccache.tar.gz /tmp -P
-       - cd /tmp
-       - time tar xf ccache.tar.gz
-       - cd /tmp
-  
+       - ./env.sh
+
   Storage-Checker_background_script:
       - df -h
       - lsblk
       - ls -l -a -h
   
   Sync_script:
-      - echo "============================"
-      - echo "Menyinkronkan Sumber..."
-      - echo "============================"
-      - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/Spark-Rom/manifest -b spark -g default,-device,-mips,-darwin,-notdefault
-      - git clone https://github.com/NFS86/local_manifest --depth 1 -b aex-12 .repo/local_manifests
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - echo "============================"
-      - echo "Sinkronisasi Selesai!"
-      - echo "============================"
+      - ./sync.sh
 
   Build_script:
-      - echo "============================"
-      - echo "Starting the Build..."
-      - echo "============================"
       - ./collect.sh
 #      - ./final.sh
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip) Completed!"
-      - echo "============================"
-      - echo "Build Completed!"
-      - echo "============================"
 
   Upload_script:
-      - echo "============================"
-      - echo "Mengunggah Build...."
-      - echo "============================"
-#      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Uploading Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip)"
-#      - rclone copy /tmp/rom/out/target/product/rosy/Spark*.zip anggitjav:rosy -P
-#      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip) Uploaded Successfully!"
-#      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Download link https://nfs.jarbull86.workers.dev/rosy/$(cd /tmp/rom/out/target/product/rosy/ && ls Spark*.zip)"
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Compres ccache"
       - ./ziping.sh
-      - cd /tmp
-      - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz anggitjav:Spark -P
-      - echo " "
-      - echo "============================"
-      - echo "Build Berhasil Diunggah!"
-      - echo "============================"
+#      - ./upload_rom.sh      
