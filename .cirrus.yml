@@ -11,7 +11,7 @@ task:
   timeout: 3h
   container:
       image: anggit86/dev:latest
-      cpu: 10
+      cpu: 8
       memory: 32G
         
   Build-Env-Setup_background_script:
