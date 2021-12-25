@@ -15,3 +15,4 @@ time tar xf ccache.tar.gz
 cd /tmp
 cat /etc/os*
 env
+nproc
