@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /tmp
 export DEBIAN_FRONTEND=noninteractive
 export ALLOW_MISSING_DEPENDENCIES=true
 mkdir -p ~/.config/rclone
@@ -10,9 +11,11 @@ git config --global user.name "NFS86"
 git config --global user.email "jarbull86@gmail.com"
 mkdir -p /tmp/ccache
 rclone copy anggitjav:ccache/rom/ccache.tar.gz /tmp -P
-cd /tmp
 time tar xf ccache.tar.gz
-cd /tmp
+rm -rf ccache.tar.gz
+rclone copy anggitjav:Spark rom.tar.gz /tmp -P
+time tar xf rom.tar.gz
+rm -rf rom.tar.gz
 cat /etc/os*
 env
 nproc

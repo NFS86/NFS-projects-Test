@@ -9,7 +9,9 @@ com ()
 }
 
 time com ccache 1
+time com rom 1
 
 cd /tmp
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Uploading ccache...."
 rclone copy ccache.tar.gz anggitjav:ccache/rom -P
+rclone copy rom.tar.gz anggitjav:Spark -P

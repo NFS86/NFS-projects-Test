@@ -16,6 +16,6 @@ export BUILD_USERNAME=finix
 export BUILD_HOSTNAME=rosy
 export WITH_GAPPS=false
 mka bacon &
-sleep 100m
+sleep 90m
 kill %1
 ccache -s
