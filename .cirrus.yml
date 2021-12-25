@@ -7,8 +7,7 @@ env:
     
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 3h
-  timeout: 3h
+  timeout_in: 8h
   container:
       image: anggit86/dev:latest
       cpu: 8
