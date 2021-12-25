@@ -15,7 +15,6 @@ export TZ=Asia/Jakarta
 export BUILD_USERNAME=finix
 export BUILD_HOSTNAME=rosy
 export WITH_GAPPS=false
-mka bacon -j8 &
-sleep 100m
+mka bacon -j8 && sleep 100m
 kill %1
 ccache -s
