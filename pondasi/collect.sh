@@ -13,11 +13,11 @@ function finerr() {
     exit 1
 }
 
-function buildenvsetup() {
+function sentup() {
 . build/envsetup.sh
 }
 
-function lunch() {
+function anu() {
 lunch spark_rosy-userdebug
 }
 
@@ -31,6 +31,6 @@ kill %1
 ccache -s
 }
 setcache
-buildenvsetup
-lunch
+sentup
+anu
 build
