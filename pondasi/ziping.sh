@@ -9,7 +9,7 @@ com ()
 
 time com ccache 1
 rclone copy ccache.tar.gz anggitjav:ccache/rom -P
-rm -rf rom.tar.gz 
+rm -rf ccache.tar.gz 
 time com rom 1
 rclone copy rom.tar.gz anggitjav:Spark -P
 rm -rf rom.tar.gz
