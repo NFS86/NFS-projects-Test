@@ -2,7 +2,7 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 20G
+ccache -M 8G
 ccache -o compression=true
 ccache -z
 }
@@ -25,7 +25,7 @@ function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building ccache started..</code>%0A$(echo "${var_cache_report_config}")"
 export CCACHE_EXEC=$(which ccache)
 export WITH_GAPPS=false
-make -j30 systemimage &
+make -j24 systemimage &
 sleep 95m
 kill %1
 ccache -s
