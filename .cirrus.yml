@@ -24,8 +24,8 @@ task:
   Sync_script:
       - ./sync.sh
 
-  Build_script:
-      - ./pondasi/collect.sh
+#  Build_script:
+#      - ./pondasi/collect.sh
 #      - ./final.sh
 
   Upload_script:
