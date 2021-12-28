@@ -22,10 +22,10 @@ lunch octavi_rosy-userdebug
 }
 
 function build() {
+export WITH_GAPPS= true
 export CCACHE_EXEC=$(which ccache)
 brunch rosy &
 sleep 95m
-finerr
 kill %1
 ccache -s
 }
