@@ -22,7 +22,7 @@ lunch octavi_rosy-userdebug
 }
 
 function build() {
-export WITH_GAPPS= true
+export WITH_GAPPS= false
 export CCACHE_EXEC=$(which ccache)
 brunch rosy &
 sleep 95m
