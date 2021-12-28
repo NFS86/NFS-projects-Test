@@ -30,7 +30,18 @@ mmma /device/xiaomi/rosy/NFSParts
 kill %1
 ccache -s
 }
+
+function push() {
+cd /tmp/rom/out/target/product/rosy/system/priv-app/NFSParts
+    zip -r9 NFSParts.zip *
+    ZIP=$(echo *.zip)
+    curl -F document=@$ZIP "https://api.telegram.org/$TG_TOKEN/sendDocument" \
+        -F chat_id="$TG_CHAT_ID" \
+        -F "disable_web_page_preview=true" \
+        -F "parse_mode=html" 
+}
 setcache
 sentup
 anu
 build
+push
