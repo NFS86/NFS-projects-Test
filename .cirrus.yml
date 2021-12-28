@@ -28,6 +28,6 @@ task:
       - ./pondasi/collect.sh
 #      - ./final.sh
 
-  Upload_script:
-      - ./pondasi/ziping.sh
+#  Upload_script:
+#      - ./pondasi/ziping.sh
 #      - ./upload_rom.sh      
