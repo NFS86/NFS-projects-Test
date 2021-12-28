@@ -22,6 +22,12 @@ lunch octavi_rosy-userdebug
 }
 
 function build() {
+# Let's compile by parts! Coz of ram issue!
+make api-stubs-docs -j10 || echo no problem
+make hiddenapi-lists-docs -j10 || echo no problem
+make system-api-stubs-docs -j10 || echo no problem
+make test-api-stubs-docs -j10 || echo no problem
+
 export WITH_GAPPS= false
 export CCACHE_EXEC=$(which ccache)
 brunch rosy &
