@@ -24,8 +24,7 @@ lunch octavi_rosy-userdebug
 function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building ccache started..</code>%0A$(echo "${var_cache_report_config}")"
 export CCACHE_EXEC=$(which ccache)
-export WITH_GAPPS=false
-mmma /device/xiaomi/rosy/NFSParts
+mmma /packages/apps/Settings -j8
 #sleep 95m
 kill %1
 ccache -s
@@ -44,4 +43,4 @@ setcache
 sentup
 anu
 build
-push
+#push
