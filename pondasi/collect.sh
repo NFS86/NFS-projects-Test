@@ -24,7 +24,7 @@ lunch octavi_rosy-userdebug
 function build() {
 export WITH_GAPPS= false
 export CCACHE_EXEC=$(which ccache)
-mmma frameworks/base &
+mmma frameworks/base -j8 &
 sleep 95m
 kill %1
 ccache -s
