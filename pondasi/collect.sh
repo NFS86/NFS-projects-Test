@@ -2,7 +2,7 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 8G
+ccache -M 20G
 ccache -o compression=true
 ccache -z
 }
@@ -24,7 +24,7 @@ lunch octavi_rosy-userdebug
 function build() {
 export WITH_GAPPS= false
 export CCACHE_EXEC=$(which ccache)
-brunch rosy &
+mmma frameworks/base &
 sleep 95m
 kill %1
 ccache -s
