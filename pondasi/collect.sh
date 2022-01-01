@@ -2,7 +2,7 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 20G
+ccache -M 50G
 ccache -o compression=true
 ccache -z
 }
@@ -21,9 +21,14 @@ function anu() {
 lunch aosp_rosy-userdebug
 }
 
-function build() {
+function set() {
+export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
+prebuilts/misc/linux-x86/ccache/ccache -M 50G
+}
+
+function build() {
 mka bacon -j8 &
 sleep 95m
 kill %1
@@ -42,5 +47,6 @@ cd /tmp/rom/out/target/product/rosy/system/priv-app/NFSParts
 setcache
 sentup
 anu
+set
 build
 #push
