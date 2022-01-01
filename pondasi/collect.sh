@@ -25,7 +25,6 @@ function set() {
 export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
-prebuilts/misc/linux-x86/ccache/ccache -M 50G
 }
 
 function build() {
