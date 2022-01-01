@@ -18,15 +18,13 @@ function sentup() {
 }
 
 function anu() {
-lunch octavi_rosy-userdebug
+lunch aosp_rosy-userdebug
 }
 
 function build() {
-export WITH_GAPPS= false
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
-export ALLOW_MISSING_DEPENDENCIES=true
-brunch rosy &
+mka bacon -j8 &
 sleep 95m
 kill %1
 ccache -s
