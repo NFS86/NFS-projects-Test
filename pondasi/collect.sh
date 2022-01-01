@@ -29,7 +29,7 @@ export CCACHE_EXEC=$(which ccache)
 }
 
 function build() {
-make VENDORIMAGES -j8 &
+make VENDORIMAGE -j8 &
 sleep 95m
 kill %1
 ccache -s
