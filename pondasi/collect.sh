@@ -2,8 +2,8 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 50G
-ccache -o compression=true
+ccache -M 10G
+ccache -o compression=false
 ccache -z
 }
 
@@ -29,7 +29,7 @@ export CCACHE_EXEC=$(which ccache)
 }
 
 function build() {
-mka bacon -j8 &
+make VENDORIMAGES -j8 &
 sleep 95m
 kill %1
 ccache -s
