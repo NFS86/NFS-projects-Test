@@ -18,7 +18,7 @@ function sentup() {
 }
 
 function anu() {
-lunch aosp_rosy-userdebug
+lunch octavi_rosy-userdebug
 }
 
 function set() {
@@ -29,7 +29,7 @@ export CCACHE_EXEC=$(which ccache)
 }
 
 function build() {
-make VENDORIMAGE -j8 &
+brunch rosy &
 sleep 95m
 kill %1
 ccache -s
