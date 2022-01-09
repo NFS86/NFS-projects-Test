@@ -25,9 +25,9 @@ task:
       - ./sync.sh
 
   Build_script:
-      - ./pondasi/collect.sh
+      - ./collect.sh
 #      - ./final.sh
 
   Upload_script:
-      - ./pondasi/ziping.sh
+      - ./ziping.sh
 #      - ./upload_rom.sh      

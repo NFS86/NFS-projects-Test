@@ -18,7 +18,7 @@ function sentup() {
 }
 
 function anu() {
-lunch octavi_rosy-userdebug
+lunch aosp_rosy-userdebug
 }
 
 function set() {
@@ -30,8 +30,8 @@ export SELINUX_IGNORE_NEVERALLOWS=true
 }
 
 function build() {
-brunch rosy &
-sleep 95m
+make bacon -j8 &
+sleep 30m
 kill %1
 ccache -s
 }
