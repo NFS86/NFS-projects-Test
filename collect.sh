@@ -2,7 +2,7 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 20G
+ccache -M 50G
 ccache -o compression=false
 ccache -z
 }
@@ -31,7 +31,7 @@ export SELINUX_IGNORE_NEVERALLOWS=true
 
 function build() {
 make bacon -j8 &
-sleep 35m
+sleep 40m
 kill %1
 ccache -s
 }
