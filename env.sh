@@ -37,6 +37,6 @@ cd /tmp
 }
 
 rcloneccache
-rclonemanifest
-#rcloneout
+#rclonemanifest
+rcloneout
 check
