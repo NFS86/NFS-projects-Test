@@ -37,7 +37,7 @@ function dono() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build ccache done...."
 }
 
-pushcache
-pushout
-#pushrom
+#pushcache
+#pushout
+pushrom
 dono
