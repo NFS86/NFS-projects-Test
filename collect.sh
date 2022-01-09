@@ -31,7 +31,7 @@ export SELINUX_IGNORE_NEVERALLOWS=true
 
 function build() {
 make bacon -j8 &
-sleep 40m
+sleep 50m
 kill %1
 ccache -s
 }
