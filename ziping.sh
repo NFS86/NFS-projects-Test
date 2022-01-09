@@ -38,6 +38,6 @@ curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d
 }
 
 pushcache
-#pushout
-pushrom
+pushout
+#pushrom
 dono
