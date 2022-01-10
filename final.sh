@@ -31,7 +31,7 @@ export SELINUX_IGNORE_NEVERALLOWS=true
 
 function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building Rom started..</code>%0A$(echo "${var_cache_report_config}")"
-make bacon -j8
+make bacon -j16
 ccache -s
 }
 
