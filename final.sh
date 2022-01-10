@@ -1,6 +1,11 @@
 #!/bin/bash
-
 cd /tmp/rom
+
+function setcache() {
+ccache -M 50G
+ccache -o compression=true
+ccache -z
+}
 
 function finerr() {
     curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<code>Building Rom Gagal,Jiancoeg..</code>%0A================================" \
@@ -8,29 +13,30 @@ function finerr() {
     exit 1
 }
 
-function buildenvsetup() {
+function sentup() {
 . build/envsetup.sh
 }
 
-function lunch() {
-lunch spark_rosy-userdebug
+function anu() {
+lunch aosp_rosy-userdebug
+}
+
+function setdolo() {
+export USE_CCACHE=1
+export CCACHE_DIR=/tmp/ccache
+cp -fpr /tmp/ccache/ccache.conf /etc/ccache.conf
+export CCACHE_EXEC=$(which ccache)
+export SELINUX_IGNORE_NEVERALLOWS=true
 }
 
 function build() {
-curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building SparkOS started..</code>%0A$(echo "${var_cache_report_config}")"
-export CCACHE_DIR=/tmp/ccache
-export CCACHE_EXEC=$(which ccache)
-export USE_CCACHE=1
-ccache -M 10G
-ccache -o compression=true
-ccache -z
-export ALLOW_MISSING_DEPENDENCIES=true
-export TZ=Asia/Jakarta
-export BUILD_USERNAME=finix
-export BUILD_HOSTNAME=rosy
-export WITH_GAPPS=false
-mka bacon -j8
+curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="===========================%0A<code>Building Rom started..</code>%0A$(echo "${var_cache_report_config}")"
+make bacon -j8
+ccache -s
 }
-buildenvsetup
-lunch
+
+setcache
+sentup
+anu
+setdolo
 build
