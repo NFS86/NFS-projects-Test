@@ -6,12 +6,16 @@ env:
     CIRRUS_WORKING_DIR: "/tmp"
     
 task:
-  name: "Setting Up, Syncing, Building and Uploading..."
+  name: "Setting Up, Syncing..."
   timeout_in: 8h
-  container:
-      image: anggit86/dev:latest
-      cpu: 8
-      memory: 32G
+  persistent_worker:
+    labels:
+      name: AX61-2
+    isolation:
+      container:
+          image: anggit86/dev:latest
+          cpu: 8
+          memory: 32G
         
   Build-Env-Setup_background_script:
        - ./env.sh
