@@ -6,6 +6,17 @@ env:
     CIRRUS_WORKING_DIR: "/tmp"
     
 task:
+  name: Test
+  timeout_in: 2m
+  container:
+      image: anggit86/dev:latest
+      cpu: 2
+      memory: 4G
+
+  env_script:
+    - env
+
+task:
   name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 8h
   container:
