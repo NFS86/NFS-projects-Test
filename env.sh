@@ -25,7 +25,6 @@ rclone copy NFS:ccache/arcanaos/out.tar.gz /tmp/rom -P
 cd /tmp/rom
 time tar xf out.tar.gz
 rm -rf out.tar.gz
-rm -rf /tmp/rom/out/target/product/rosy
 }
 
 function check() {
