@@ -21,7 +21,7 @@ function anu() {
 lunch aosp_rosy-userdebug
 }
 
-function set() {
+function setdolo() {
 export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 cp -fpr /tmp/ccache/ccache.conf /etc/ccache.conf
@@ -48,6 +48,6 @@ cd /tmp/rom/out/target/product/rosy/system/priv-app/NFSParts
 setcache
 sentup
 anu
-set
+setdolo
 build
 #push
