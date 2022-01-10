@@ -17,12 +17,14 @@ task:
     - env
 
 task:
-  name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 8h
+  name: Build
+  depends_on:
+    - Test
+  timeout_in: 4h
   container:
       image: anggit86/dev:latest
-      cpu: 8
-      memory: 32G
+      cpu: 24
+      memory: 120G
         
   Build-Env-Setup_background_script:
        - ./env.sh
