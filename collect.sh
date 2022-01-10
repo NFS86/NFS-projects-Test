@@ -3,7 +3,7 @@ cd /tmp/rom
 
 function setcache() {
 ccache -M 50G
-ccache -o compression=false
+ccache -o compression=true
 ccache -z
 }
 
