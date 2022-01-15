@@ -38,8 +38,8 @@ task:
       - ./sync.sh
 
   Build_script:
-#      - ./collect.sh
-      - ./final.sh
+      - ./collect.sh
+#      - ./final.sh
 
 #  Upload_script:
 #      - ./ziping.sh
