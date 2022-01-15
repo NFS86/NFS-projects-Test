@@ -6,20 +6,7 @@ env:
     CIRRUS_WORKING_DIR: "/tmp"
     
 task:
-  name: Test
-  timeout_in: 2m
-  container:
-      image: anggit86/dev:latest
-      cpu: 2
-      memory: 4G
-
-  env_script:
-    - env
-
-task:
   name: Build
-  depends_on:
-    - Test
   timeout_in: 4h
   container:
       image: anggit86/dev:latest
