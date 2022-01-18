@@ -3,7 +3,7 @@ cd /tmp/rom
 
 function setcache() {
 ccache -M 50G
-ccache -o compression=true
+ccache -o compression=false
 ccache -z
 }
 
@@ -30,7 +30,9 @@ export SELINUX_IGNORE_NEVERALLOWS=true
 }
 
 function build() {
-mmma packages/apps/NFSParts -j8
+make bacon -j8 &
+sleep 80m
+kill %1
 ccache -s
 }
 
@@ -48,4 +50,4 @@ sentup
 anu
 setdolo
 build
-push
+#push
