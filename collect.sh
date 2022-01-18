@@ -45,9 +45,9 @@ cd /tmp/rom/out/target/product/rosy/system/priv-app/NFSParts
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
 }
-setcache
+#setcache
 sentup
 anu
-setdolo
+#setdolo
 build
 #push

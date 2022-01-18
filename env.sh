@@ -36,7 +36,7 @@ clang --version
 cd /tmp
 }
 
-rcloneccache
+#rcloneccache
 #rclonemanifest
 rcloneout
 check
