@@ -3,7 +3,7 @@ cd /tmp/rom
 
 function setcache() {
 ccache -M 50G
-ccache -o compression=false
+ccache -o compression=true
 ccache -z
 }
 
@@ -26,7 +26,6 @@ export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 cp -fpr /tmp/ccache/ccache.conf /etc/ccache.conf
 export CCACHE_EXEC=$(which ccache)
-export SELINUX_IGNORE_NEVERALLOWS=true
 }
 
 function build() {
@@ -45,9 +44,9 @@ cd /tmp/rom/out/target/product/rosy/system/priv-app/NFSParts
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
 }
-#setcache
+setcache
 sentup
 anu
-#setdolo
+setdolo
 build
 #push
