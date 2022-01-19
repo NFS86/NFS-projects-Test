@@ -28,6 +28,6 @@ task:
       - ./collect.sh
 #      - ./final.sh
 
-  Upload_script:
-      - ./ziping.sh
+#  Upload_script:
+#      - ./ziping.sh
 #      - ./upload_rom.sh      

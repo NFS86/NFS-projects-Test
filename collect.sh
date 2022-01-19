@@ -30,9 +30,7 @@ export CCACHE_EXEC=$(which ccache)
 }
 
 function build() {
-make bacon -j8 &
-sleep 80m
-kill %1
+mmma packages/apps/NFSParts -j8
 ccache -s
 }
 
@@ -50,4 +48,4 @@ sentup
 anu
 setdolo
 build
-#push
+push
