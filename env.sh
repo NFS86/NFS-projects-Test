@@ -9,11 +9,6 @@ mkdir -p /tmp/ccache
 rclone copy NFS:ccache/arcanaos/ccache.tar.gz /tmp -P
 time tar xf ccache.tar.gz
 rm -rf ccache.tar.gz
-cp ccache /usr/local/bin/
-ln -s ccache /usr/local/bin/gcc
-ln -s ccache /usr/local/bin/g++
-ln -s ccache /usr/local/bin/cc
-ln -s ccache /usr/local/bin/c++
 }
 
 function rclonemanifest() {

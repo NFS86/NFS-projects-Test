@@ -24,7 +24,7 @@ lunch aosp_rosy-userdebug
 function setdolo() {
 export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
-cp -fpr /tmp/ccache/ccache.conf /etc/ccache.conf
+cp -fpr /tmp/ccache/ccache.conf /tmp/.config/ccache/ccache.conf
 export CCACHE_EXEC=$(which ccache)
 }
 
