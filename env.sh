@@ -6,7 +6,7 @@ echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 
 function rcloneccache() {
 mkdir -p /tmp/ccache
-rclone copy NFS:ccache/arcanaos/ccache.tar.gz /tmp -P
+rclone copy NFS:ccache/MemParts/ccache.tar.gz /tmp -P
 time tar xf ccache.tar.gz
 rm -rf ccache.tar.gz
 }
@@ -36,7 +36,7 @@ clang --version
 cd /tmp
 }
 
-#rcloneccache
+rcloneccache
 #rclonemanifest
 #rcloneout
 check
