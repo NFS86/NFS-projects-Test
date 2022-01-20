@@ -34,7 +34,7 @@ rm -rf rom.tar.gz
 }
 
 function dono() {
-curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build ccache done...."
+curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build vendor and upload ccache [✅]...."
 }
 
 pushcache

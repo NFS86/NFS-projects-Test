@@ -30,12 +30,17 @@ export CCACHE_EXEC=$(which ccache)
 }
 
 function build() {
+curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<code>Test Building vendor image..</code>%0A$(echo "${var_cache_report_config}")"
+curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<b>Show build: </b>https://cirrus-ci.com/github/NFS86/NFS-projects-Test/vendor"
 make vendorimage -j8
+ccache -s
+}
+
+function check() {
 if ! [ -a "$VENDOR" ]; then
 	finerr
 	exit 1
 fi
-ccache -s
 }
 
 function push() {
@@ -52,4 +57,5 @@ sentup
 anu
 setdolo
 build
-#push
+check
+push
