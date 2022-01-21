@@ -31,7 +31,7 @@ export CCACHE_EXEC=$(which ccache)
 
 function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<code>Test Building vendor image..</code>%0A$(echo "${var_cache_report_config}")"
-curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<b>Show build: </b>https://cirrus-ci.com/github/NFS86/NFS-projects-Test/vendor"
+curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<b>Show build: </b>https://cirrus-ci.com/github/NFS86/NFS-projects-Test/vendor%0A================================"
 make vendorimage -j8
 ccache -s
 }
@@ -45,12 +45,7 @@ fi
 
 function push() {
 cd /tmp/rom/out/target/product/rosy
-    zip -r9 vendor.zip vendor.img
-    ZIP=$(echo *.zip)
-    curl -F document=@$ZIP "https://api.telegram.org/$TG_TOKEN/sendDocument" \
-        -F chat_id="$TG_CHAT_ID" \
-        -F "disable_web_page_preview=true" \
-        -F "parse_mode=html" 
+    rclone copy vendor.img NFS:ccache/vendor -P
 }
 setcache
 sentup
