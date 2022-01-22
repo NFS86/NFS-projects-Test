@@ -4,7 +4,7 @@ env:
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: "/tmp"
-    VENDOR: /tmp/rom/out/target/product/rosy/vendor.img
+    SYSTEM: /tmp/rom/out/target/product/rosy/system.img
     
 task:
   name: Build
