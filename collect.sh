@@ -37,7 +37,7 @@ ccache -s
 
 function check() {
 if ! [ -a "$SYSTEM" ]; then
-	finerr
+	bash ziping.sh
 	exit 1
 fi
 }
