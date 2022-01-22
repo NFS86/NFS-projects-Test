@@ -31,14 +31,12 @@ export CCACHE_EXEC=$(which ccache)
 function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<code>Test Building system image..</code>%0A$(echo "${var_cache_report_config}")"
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<b>Show build: </b>https://cirrus-ci.com/github/NFS86/NFS-projects-Test/system%0A================================"
-make systemimage -j8 &
-sleep 90m
-kill %1
+make systemimage -j8
 ccache -s
 }
 
 function check() {
-if ! [ -a "$VENDOR" ]; then
+if ! [ -a "$SYSTEM" ]; then
 	finerr
 	exit 1
 fi
@@ -47,12 +45,12 @@ fi
 function push() {
 cd /tmp/rom/out/target/product/rosy
 zip -r9 system.zip system.img
-rclone copy system.zip NFS:ccache/vendor -P
+rclone copy system.zip NFS:ccache/system -P
 }
 setcache
 sentup
 anu
 setdolo
 build
-#check
-#push
+check
+push
