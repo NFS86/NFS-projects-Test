@@ -9,7 +9,7 @@ env:
     SYSTEM_IMAGE: /tmp/rom/out/target/product/rosy/system.img
     VENDOR_IMAGE: /tmp/rom/out/target/product/rosy/vendor.img
     BUILD_VENDOR_ONLY: true
-    BUILD_VENDOR_ONLY: false
+    BUILD_SYSTEM_ONLY: false
 
 task:
   name: Build
