@@ -4,7 +4,7 @@ cd /tmp
 mkdir -p ~/.config/rclone
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 
-ifeq ($(BUILD_SYSTEM_ONLY),true)
+ifeq ($BUILD_SYSTEM_ONLY:true)
   echo Build variant SYSTEM terdeteksi..
   echo Melanjutkan untuk mengambil ccache SYSTEM
   mkdir -p /tmp/ccache
@@ -13,7 +13,7 @@ ifeq ($(BUILD_SYSTEM_ONLY),true)
   rm -rf ccache.tar.gz
 endif
 
-ifeq ($(BUILD_VENDOR_ONLY),true)
+ifeq ($BUILD_VENDOR_ONLY:true)
   echo Build variant VENDOR terdeteksi..
   echo Melanjutkan untuk mengambil ccache VENDOR
   mkdir -p /tmp/ccache
