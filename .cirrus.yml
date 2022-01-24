@@ -4,7 +4,11 @@ env:
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: "/tmp"
-    SYSTEM: /tmp/rom/out/target/product/rosy/system.img
+    SYSTEM: systemimage
+    VENDOR: vendorimage
+    SYSTEM_IMAGE: /tmp/rom/out/target/product/rosy/system.img
+    VENDOR_IMAGE: /tmp/rom/out/target/product/rosy/vendor.img
+    BUILD_TYPE: $SYSTEM
     
 task:
   name: Build
@@ -15,7 +19,7 @@ task:
       memory: 32G
         
   Build-Env-Setup_background_script:
-       - ./env.sh
+       - ./arcana/env.sh
 
   Storage-Checker_background_script:
       - df -h
@@ -23,12 +27,10 @@ task:
       - ls -l -a -h
   
   Sync_script:
-      - ./sync.sh
+      - ./arcana/sync.sh
 
   Build_script:
-      - ./collect.sh
-#      - ./final.sh
+      - ./arcana/build.sh
 
   Upload_script:
-      - ./ziping.sh
-#      - ./upload_rom.sh      
+      - ./arcana/ziping.sh
