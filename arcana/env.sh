@@ -4,7 +4,7 @@ cd /tmp
 mkdir -p ~/.config/rclone
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 
-if ["$BUILD_TYPE= systemimage" ]; then
+if ["$BUILD_TYPE" ]; then
   echo Build variant SYSTEM terdeteksi..
   echo Melanjutkan untuk mengambil ccache SYSTEM
   mkdir -p /tmp/ccache
@@ -13,7 +13,7 @@ if ["$BUILD_TYPE= systemimage" ]; then
   rm -rf ccache.tar.gz
 fi
 
-if ["$BUILD_TYPE= vendorimage" ]; then
+if ["$BUILD_TYPE" ]; then
   echo Build variant VENDOR terdeteksi..
   echo Melanjutkan untuk mengambil ccache VENDOR
   mkdir -p /tmp/ccache
