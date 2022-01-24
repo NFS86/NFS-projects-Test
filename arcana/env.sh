@@ -4,23 +4,23 @@ cd /tmp
 mkdir -p ~/.config/rclone
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 
-if ["$BUILD_TYPE" ]; then
+ifeq ($(BUILD_SYSTEM_ONLY),true)
   echo Build variant SYSTEM terdeteksi..
   echo Melanjutkan untuk mengambil ccache SYSTEM
   mkdir -p /tmp/ccache
   rclone copy NFS:ccache/arcanaos/system/ccache.tar.gz /tmp -P
   time tar xf ccache.tar.gz
   rm -rf ccache.tar.gz
-fi
+endif
 
-if ["$BUILD_TYPE" ]; then
+ifeq ($(BUILD_VENDOR_ONLY),true)
   echo Build variant VENDOR terdeteksi..
   echo Melanjutkan untuk mengambil ccache VENDOR
   mkdir -p /tmp/ccache
   rclone copy NFS:ccache/arcanaos/vendor/ccache.tar.gz /tmp -P
   time tar xf ccache.tar.gz
   rm -rf ccache.tar.gz
-fi
+endif
 
 function check() {
 cat /etc/os*
