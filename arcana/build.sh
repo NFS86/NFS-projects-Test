@@ -43,6 +43,12 @@ fi
 
 function checkv() {
 if ! [ -a "$VENDOR_IMAGE" ]; then
+	checkb
+fi
+}
+
+function checkb() {
+if ! [ -a "$BOOT_IMAGE" ]; then
 	finerr
 	exit 1
 fi
