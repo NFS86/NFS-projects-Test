@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ifneq ($(BUILD_TYPE),systemimage)
+ifneq ($(BUILD_TYPE),$SYSTEM)
 echo Build variant SYSTEM terdeteksi..
 echo Melanjutkan untuk upload ccache SYSTEM
 pushcachesytem
@@ -9,7 +9,7 @@ pushsystem
 echo upload system done
 endif
 
-ifneq ($(BUILD_TYPE),vendorimage)
+ifneq ($(BUILD_TYPE),$VENDOR)
 echo Build variant VENDOR terdeteksi..
 echo Melanjutkan untuk upload ccache VENDOR
 pushcachevendor
