@@ -66,18 +66,18 @@ fi
 if [ "$BUILD_VENDOR_ONLY" == "true" ]; then
   echo Build variant VENDOR terdeteksi..
   echo Melanjutkan untuk upload ccache VENDOR
-  pushcacheboot
+  pushcachevendor
   echo upload ccache done
-  pushboot
+  pushvendor
   echo upload vendor done
 fi
 
 if [ "$BUILD_BOOT_ONLY" == "true" ]; then
   echo Build variant Boot terdeteksi..
   echo Melanjutkan untuk upload ccache BOOT
-  pushcachevendor
+  pushcacheboot
   echo upload ccache done
-  pushvendor
+  pushboot
   echo upload vendor done
 fi
 
