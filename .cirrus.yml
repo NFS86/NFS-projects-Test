@@ -10,7 +10,9 @@ env:
     VENDOR_IMAGE: /tmp/rom/out/target/product/rosy/vendor.img
     BUILD_VENDOR_ONLY: "true"
     BUILD_SYSTEM_ONLY: "false"
-
+    LUNCH: aosp_rosy-userdebug
+    BUILD_TYPE: "$VENDOR"
+    
 task:
   name: Build
   timeout_in: 4h

@@ -18,7 +18,7 @@ function sentup() {
 }
 
 function anu() {
-lunch aosp_rosy-userdebug
+lunch $LUNCH
 }
 
 function setdolo() {

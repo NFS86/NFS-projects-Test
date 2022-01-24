@@ -1,22 +1,22 @@
 #!/bin/bash
 
-ifeq ($(strip $(BUILD_TYPE)),systemimage)
-echo Build variant SYSTEM terdeteksi..
-echo Melanjutkan untuk upload ccache SYSTEM
-pushcachesytem
-echo upload ccache done
-pushsystem
-echo upload system done
-endif
+if [ "$BUILD_SYSTEM_ONLY" == "true" ]; then
+  echo Build variant SYSTEM terdeteksi..
+  echo Melanjutkan untuk upload ccache SYSTEM
+  pushcachesytem
+  echo upload ccache done
+  pushsystem
+  echo upload system done
+fi
 
-ifeq ($(strip $(BUILD_TYPE)),vendorimage)
-echo Build variant VENDOR terdeteksi..
-echo Melanjutkan untuk upload ccache VENDOR
-pushcachevendor
-echo upload ccache done
-pushvendor
-echo upload vendor done
-endif
+if [ "$BUILD_VENDOR_ONLY" == "true" ]; then
+  echo Build variant VENDOR terdeteksi..
+  echo Melanjutkan untuk upload ccache VENDOR
+  pushcachevendor
+  echo upload ccache done
+  pushvendor
+  echo upload vendor done
+fi
 
 function pushcachesytem() {
 cd /tmp
