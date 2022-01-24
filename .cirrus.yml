@@ -10,10 +10,11 @@ env:
     SYSTEM_IMAGE: /tmp/rom/out/target/product/rosy/system.img
     VENDOR_IMAGE: /tmp/rom/out/target/product/rosy/vendor.img
     BOOT_IMAGE: /tmp/rom/out/target/product/rosy/boot.img
-    BUILD_VENDOR_ONLY: "true"
+    BUILD_VENDOR_ONLY: "false"
     BUILD_SYSTEM_ONLY: "false"
+    BUILD_BOOT_ONLY: "true"
     LUNCH: aosp_rosy-userdebug
-    BUILD_TYPE: "$VENDOR"
+    BUILD_TYPE: "$BOOT"
     SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
