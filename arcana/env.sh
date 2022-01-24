@@ -4,7 +4,7 @@ cd /tmp
 mkdir -p ~/.config/rclone
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 
-ifneq ($(BUILD_TYPE),$SYSTEM)
+ifneq ($BUILD_TYPE=$SYSTEM)
 echo Build variant SYSTEM terdeteksi..
 echo Melanjutkan untuk mengambil ccache SYSTEM
 mkdir -p /tmp/ccache
@@ -13,7 +13,7 @@ time tar xf ccache.tar.gz
 rm -rf ccache.tar.gz
 endif
 
-ifneq ($(BUILD_TYPE),$VENDOR)
+ifneq (BUILD_TYPE=$VENDOR)
 echo Build variant VENDOR terdeteksi..
 echo Melanjutkan untuk mengambil ccache VENDOR
 mkdir -p /tmp/ccache
