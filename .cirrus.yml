@@ -12,6 +12,8 @@ env:
     BUILD_SYSTEM_ONLY: "false"
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$VENDOR"
+    SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
+    LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     
 task:
   name: Build
