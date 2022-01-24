@@ -8,7 +8,7 @@ env:
     VENDOR: vendorimage
     SYSTEM_IMAGE: /tmp/rom/out/target/product/rosy/system.img
     VENDOR_IMAGE: /tmp/rom/out/target/product/rosy/vendor.img
-    BUILD_TYPE: $SYSTEM
+    BUILD_TYPE: $VENDOR
     
 task:
   name: Build
