@@ -1,5 +1,5 @@
 env:
-    rcloneconfig: "ENCRYPTED[6b6367eb0b1a215a793716317221b73a3b7041e63ba6df999bd3220fa6ec355697c47380808584851da4b158e0392d30]"
+    rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
     TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
     CIRRUS_CLONE_DEPTH: 1
@@ -21,7 +21,7 @@ env:
 
 task:
   name: Build
-  timeout_in: 4h
+  timeout_in: 2h
   container:
       image: anggit86/docker:cirrus
       cpu: 8
