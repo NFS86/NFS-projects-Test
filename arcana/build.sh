@@ -2,8 +2,10 @@
 cd /tmp/rom
 
 function setcache() {
-ccache -M 50G
-ccache -o compression=false
+ccache -M 20G
+export USE_CCACHE=1
+export CCACHE_DIR=/tmp/ccache
+export CCACHE_EXEC=$(which ccache)
 ccache -z
 }
 
@@ -21,17 +23,12 @@ function anu() {
 lunch $LUNCH
 }
 
-function setdolo() {
-export USE_CCACHE=1
-export CCACHE_DIR=/tmp/ccache
-cp -fpr /tmp/ccache/ccache.conf /etc/ccache.conf
-export CCACHE_EXEC=$(which ccache)
-}
-
 function build() {
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<code>Test Building image..</code>%0A$(echo "${var_cache_report_config}")"
 curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="================================%0A<b>Show build: </b>https://cirrus-ci.com/github/NFS86/NFS-projects-Test%0A================================"
-make $BUILD_TYPE -j8
+make $BUILD_TYPE -j8 &
+sleep 95m
+kill %1
 ccache -s
 }
 
@@ -57,6 +54,5 @@ fi
 setcache
 sentup
 anu
-setdolo
 build
-check
+#check

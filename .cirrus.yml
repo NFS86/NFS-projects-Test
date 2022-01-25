@@ -26,6 +26,10 @@ task:
       image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
+      volumes:
+        - /tmp/ccache:/tmp/ccache
+        - /tmp/rom:/tmp/rom
+        - /tmp/.config:/tmp/.config
         
   Build-Env-Setup_background_script:
        - ./arcana/env.sh
