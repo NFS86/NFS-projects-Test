@@ -59,8 +59,8 @@ if [ "$BUILD_SYSTEM_ONLY" == "true" ]; then
   echo Melanjutkan untuk upload ccache SYSTEM
   pushcachesytem
   echo upload ccache done
-  pushsystem
-  echo upload system done
+  #pushsystem
+  #echo upload system done
 fi
 
 if [ "$BUILD_VENDOR_ONLY" == "true" ]; then
