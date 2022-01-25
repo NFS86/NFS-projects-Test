@@ -45,6 +45,7 @@ ccache -M 20G
 export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
+ccache -o compression=true
 ccache -z
 }
 
