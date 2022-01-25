@@ -29,7 +29,8 @@ task:
       volumes:
         - /tmp/ccache:/tmp/ccache
         - /tmp/rom:/tmp/rom
-        - /tmp/.config:/tmp/.config
+        - /tmp/ccache/ccache.conf:/tmp/ccache/ccache.conf
+        - /etc/ccache.conf:/etc/ccache.conf
         
   Environment_script:
       - ./arcana/env.sh
@@ -39,9 +40,6 @@ task:
       - lsblk
       - ls -l -a -h
 
-  Ccache_set_script:
-      - ./arcana/ccache.sh
-      
   Sync_script:
       - ./arcana/sync.sh
 
