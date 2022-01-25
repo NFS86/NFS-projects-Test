@@ -46,6 +46,12 @@ export USE_CCACHE=1
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
 ccache -o compression=true
+ccache - a fast C/C++ compiler cache
+cp -r /tmp/ccache /usr/local/bin/
+ln -s /tmp/ccache /usr/local/bin/gcc
+ln -s /tmp/ccache /usr/local/bin/g++
+ln -s /tmp/ccache /usr/local/bin/cc
+ln -s /tmp/ccache /usr/local/bin/c++
 ccache -z
 }
 
