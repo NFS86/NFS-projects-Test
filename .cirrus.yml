@@ -31,14 +31,17 @@ task:
         - /tmp/rom:/tmp/rom
         - /tmp/.config:/tmp/.config
         
-  Build-Env-Setup_background_script:
-       - ./arcana/env.sh
+  Environment_script:
+      - ./arcana/env.sh
 
-  Storage-Checker_background_script:
+  Storage-Check_script:
       - df -h
       - lsblk
       - ls -l -a -h
-  
+
+  Ccache_set_script:
+      - ./arcana/ccache.sh
+      
   Sync_script:
       - ./arcana/sync.sh
 
