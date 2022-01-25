@@ -40,4 +40,13 @@ clang --version
 cd /tmp
 }
 
+function setcache() {
+ccache -M 20G
+export USE_CCACHE=1
+export CCACHE_DIR=/tmp/ccache
+export CCACHE_EXEC=$(which ccache)
+ccache -z
+}
+
 check
+setcache
