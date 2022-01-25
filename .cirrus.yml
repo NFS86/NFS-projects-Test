@@ -26,11 +26,6 @@ task:
       image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
-      volumes:
-        - /tmp/ccache:/tmp/ccache
-        - /tmp/rom:/tmp/rom
-        - /tmp/ccache/ccache.conf:/tmp/ccache/ccache.conf
-        - /etc/ccache.conf:/etc/ccache.conf
         
   Environment_script:
       - ./arcana/env.sh
