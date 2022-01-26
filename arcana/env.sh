@@ -31,6 +31,15 @@ if [ "$BUILD_BOOT_ONLY" == "true" ]; then
   rm -rf ccache.tar.gz
 fi
 
+if [ "$BUILD_FULL" == "true" ]; then
+  echo Build variant Full terdeteksi..
+  echo Melanjutkan untuk mengambil ccache Full
+  mkdir -p /tmp/ccache
+  rclone copy NFS:ccache/$DIR/full/ccache.tar.gz /tmp -P
+  time tar xf ccache.tar.gz
+  rm -rf ccache.tar.gz
+fi
+
 function check() {
 cat /etc/os*
 env

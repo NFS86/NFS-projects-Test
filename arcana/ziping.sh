@@ -33,6 +33,17 @@ rclone copy ccache.tar.gz NFS:ccache/$DIR/boot -P
 rm -rf ccache.tar.gz
 }
 
+function pushcachefull() {
+cd /tmp
+com ()
+{
+    tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
+}
+time com ccache 1
+rclone copy ccache.tar.gz NFS:ccache/$DIR/full -P
+rm -rf ccache.tar.gz
+}
+
 function pushsystem() {
 cd /tmp/rom/out/target/product/rosy
 zip -r9 system.zip system.img
@@ -59,8 +70,8 @@ if [ "$BUILD_SYSTEM_ONLY" == "true" ]; then
   echo Melanjutkan untuk upload ccache SYSTEM
   pushcachesytem
   echo upload ccache done
-  #pushsystem
-  #echo upload system done
+  pushsystem
+  echo upload system done
 fi
 
 if [ "$BUILD_VENDOR_ONLY" == "true" ]; then
@@ -79,6 +90,13 @@ if [ "$BUILD_BOOT_ONLY" == "true" ]; then
   echo upload ccache done
   pushboot
   echo upload vendor done
+fi
+
+if [ "$BUILD_FULL" == "true" ]; then
+  echo Build variant Full terdeteksi..
+  echo Melanjutkan untuk upload ccache Full
+  pushcachefull
+  echo upload ccache done
 fi
 
 
