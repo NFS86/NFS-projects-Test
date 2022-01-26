@@ -25,6 +25,7 @@ env:
     SYNC: https://github.com/NFS-projects/manifest -b 12.x
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
+    CIRRUS_CPU: 16
 
 task:
   name: Build
