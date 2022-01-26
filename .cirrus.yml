@@ -20,7 +20,7 @@ env:
     BUILD_CCACHE_ONLY: "false"
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$SYSTEM"
-    SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
+    SYNC: https://github.com/NFS-projects/manifest -b 12.x
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
 
