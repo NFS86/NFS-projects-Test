@@ -60,4 +60,4 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   ccache -s
 fi
 
-#check
+check
