@@ -34,9 +34,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   export CCACHE_CONFIGPATH=/tmp/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
-  for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
   ccache -z
-  cp -r /tmp/ccache/ccache.conf /etc/ccache.conf
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE &
@@ -53,9 +51,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   export CCACHE_CONFIGPATH=/tmp/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
-  for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
   ccache -z
-  cp -r /tmp/ccache/ccache.conf /etc/ccache.conf
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE
