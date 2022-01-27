@@ -37,7 +37,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   ccache -z
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j$(nproc --all) &
+  $BUILD_TYPE -j20 &
   sleep 95m
   kill %1
   ccache -s
@@ -54,7 +54,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   ccache -z
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j$(nproc --all)
+  $BUILD_TYPE -j20
   check
   ccache -s
 fi
