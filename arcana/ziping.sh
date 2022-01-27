@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function pushcachesytem() {
-cd /tmp
+cd /tmp/cirrus-ci-build
 com ()
 {
     tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
@@ -12,7 +12,7 @@ rm -rf ccache.tar.gz
 }
 
 function pushcachevendor() {
-cd /tmp
+cd /tmp/cirrus-ci-build
 com ()
 {
     tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
@@ -23,7 +23,7 @@ rm -rf ccache.tar.gz
 }
 
 function pushcacheboot() {
-cd /tmp
+cd /tmp/cirrus-ci-build
 com ()
 {
     tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
@@ -34,7 +34,7 @@ rm -rf ccache.tar.gz
 }
 
 function pushcachefull() {
-cd /tmp
+cd /tmp/cirrus-ci-build
 com ()
 {
     tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
@@ -45,18 +45,18 @@ rm -rf ccache.tar.gz
 }
 
 function pushsystem() {
-cd /tmp/rom/out/target/product/rosy
+cd /tmp/cirrus-ci-build/rom/out/target/product/rosy
 zip -r9 system.zip system.img
 rclone copy system.zip NFS:ccache/$DIR/system -P
 }
 
 function pushvendor() {
-cd /tmp/rom/out/target/product/rosy
+cd /tmp/cirrus-ci-build/rom/out/target/product/rosy
 rclone copy vendor.img NFS:ccache/$DIR/vendor -P
 }
 
 function pushboot() {
-cd /tmp/rom/out/target/product/rosy
+cd /tmp/cirrus-ci-build/rom/out/target/product/rosy
 rclone copy boot.img NFS:ccache/$DIR/boot -P
 }
 

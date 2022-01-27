@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /tmp/rom
+cd /tmp/cirrus-ci-build/rom
 
 function check() {
 if ! [ -a "$SYSTEM_IMAGE" ]; then
@@ -29,9 +29,9 @@ function finerr() {
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   ccache -M 20G
   export USE_CCACHE=1
-  export CCACHE_DIR=/tmp/ccache
+  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_EXEC=$(which ccache)
-  export CCACHE_CONFIGPATH=/tmp/ccache/ccache.conf
+  export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z
@@ -46,9 +46,9 @@ fi
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   ccache -M 20G
   export USE_CCACHE=1
-  export CCACHE_DIR=/tmp/ccache
+  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_EXEC=$(which ccache)
-  export CCACHE_CONFIGPATH=/tmp/ccache/ccache.conf
+  export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z
