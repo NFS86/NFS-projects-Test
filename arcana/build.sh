@@ -55,7 +55,6 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE
+  check
   ccache -s
 fi
-
-#check
