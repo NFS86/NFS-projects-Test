@@ -1,6 +1,6 @@
 container:
     image: anggit86/docker:cirrus
-    cpu: 8
+    cpu: 9
     memory: 32G
 
 env:
