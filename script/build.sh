@@ -52,7 +52,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   sed -i '78 i \\t"ccache":  Allowed,' build/soong/ui/build/paths/config.go
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j23 &
+  $BUILD_TYPE -j$(nproc --all) &
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo BUILD OUT FOLDER AKTIF..
      sleep 80m
@@ -81,7 +81,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   sed -i '78 i \\t"ccache":  Allowed,' build/soong/ui/build/paths/config.go
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j23
+  $BUILD_TYPE -j$(nproc --all)
   check
   ccache -s
 fi
