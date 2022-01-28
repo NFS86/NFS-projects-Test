@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ccache -M 20G
+ccache -M 10G
 export USE_CCACHE=1
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)

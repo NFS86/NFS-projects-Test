@@ -95,25 +95,16 @@ fi
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
    if [ "$BUILD_SYSTEM_ONLY" == "true" ]; then
       echo Build variant SYSTEM terdeteksi..
-      echo Melanjutkan untuk upload ccache SYSTEM
-      pushcachesytem
-      echo upload ccache done
       pushsystem
       echo upload system done
    fi
    if [ "$BUILD_VENDOR_ONLY" == "true" ]; then
       echo Build variant VENDOR terdeteksi..
-      echo Melanjutkan untuk upload ccache VENDOR
-      pushcachevendor
-      echo upload ccache done
       pushvendor
       echo upload vendor done
    fi
    if [ "$BUILD_BOOT_ONLY" == "true" ]; then
       echo Build variant Boot terdeteksi..
-      echo Melanjutkan untuk upload ccache BOOT
-      pushcacheboot
-      echo upload ccache done
       pushboot
       echo upload vendor done
    fi

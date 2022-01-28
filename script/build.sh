@@ -26,8 +26,19 @@ function finerr() {
     exit 1
 }
 
+function pushout() {
+cd /tmp/cirrus-ci-build/rom/out/target/product
+com ()
+{
+    tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
+}
+time com rosy 1
+rclone copy rosy.tar.gz NFS:ccache/$DIR -P
+rm -rf rosy.tar.gz
+}
+
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
-  ccache -M 20G
+  ccache -M 10G
   export USE_CCACHE=1
   export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_EXEC=$(which ccache)
@@ -37,14 +48,22 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   ccache -z
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j20 &
+  $BUILD_TYPE -j23 &
+  if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
+     echo BUILD OUT FOLDER AKTIF..
+     sleep 80m
+     kill %1
+     pushout
+     ccache -s
+     exit 1
+  fi
   sleep 95m
   kill %1
   ccache -s
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
-  ccache -M 20G
+  ccache -M 10G
   export USE_CCACHE=1
   export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_EXEC=$(which ccache)
@@ -54,7 +73,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   ccache -z
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j20
+  $BUILD_TYPE -j23
   check
   ccache -s
 fi

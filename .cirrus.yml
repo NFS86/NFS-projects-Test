@@ -21,6 +21,7 @@ env:
     BUILD_BOOT_ONLY: "false"
     BUILD_CCACHE_ONLY: "true"
     BUILD_FULL: "false"
+    BUILD_OUT_FOLDER: "no"
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$SYSTEM"
     SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
@@ -32,7 +33,7 @@ task:
   name: Build
   timeout_in: 2h
   Environment_script:
-      - ./arcana/env.sh
+      - ./script/env.sh
 
   Storage-Check_script:
       - df -h
@@ -40,10 +41,10 @@ task:
       - ls -l -a -h
 
   Sync_script:
-      - ./arcana/sync.sh
+      - ./script/sync.sh
 
   Build_script:
-      - ./arcana/build.sh
+      - ./script/build.sh
 
   Upload_script:
-      - ./arcana/ziping.sh
+      - ./script/ziping.sh
