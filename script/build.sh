@@ -49,6 +49,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z
+  sed -i '78 i \\t"ccache":  Allowed,' build/soong/ui/build/paths/config.go
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE -j23 &
@@ -77,6 +78,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z
+  sed -i '78 i \\t"ccache":  Allowed,' build/soong/ui/build/paths/config.go
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE -j23
