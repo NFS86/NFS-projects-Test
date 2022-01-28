@@ -38,10 +38,13 @@ rm -rf rosy.tar.gz
 }
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
-  ccache -M 10G
-  export USE_CCACHE=1
-  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+  ccache -M 50G
   export CCACHE_EXEC=$(which ccache)
+  export USE_CCACHE=1
+  export CCACHE_COMPRESS=true
+  export CCACHE_COMPRESSLEVEL=1
+  export CCACHE_LIMIT_MULTIPLE=0.9
+  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
@@ -63,10 +66,13 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
-  ccache -M 10G
-  export USE_CCACHE=1
-  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+  ccache -M 50G
   export CCACHE_EXEC=$(which ccache)
+  export USE_CCACHE=1
+  export CCACHE_COMPRESS=true
+  export CCACHE_COMPRESSLEVEL=1
+  export CCACHE_LIMIT_MULTIPLE=0.9
+  export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
   export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache

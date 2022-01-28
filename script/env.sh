@@ -10,6 +10,12 @@ env
 nproc
 gcc --version
 clang --version
+cat > /tmp/ccache/ccache.conf <<EOF
+max_size = 50.0G
+compression = true
+compression_level = 1
+limit_multiple = 0.9
+EOF
 cd /tmp/cirrus-ci-build
 }
 
