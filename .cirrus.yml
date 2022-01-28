@@ -1,7 +1,7 @@
 container:
     image: anggit86/docker:cirrus
-    cpu: 8
-    memory: 32G
+    cpu: 15
+    memory: 24G
 
 env:
     rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
