@@ -33,15 +33,13 @@ env:
     CIRRUS_CPU: 30
 
 task:
-  - name: environment
-    Environment_script: ./script/env.sh
+  name: Build
+  alias: Tests
+  persistent_worker:
+    labels:
+      os: darwin
+  Environment_script: ./script/env.sh
 
-  depends_on:
-    - environment
-  - name: storage
-    Storage-Check_script: df -h && lsblk && ls -l -a -h
+  Storage-Check_script: df -h && lsblk && ls -l -a -h
   
-  depends_on:
-    - storage
-  - name: sync
-    Sync_script: ./script/sync.sh
+  Sync_script: ./script/sync.sh
