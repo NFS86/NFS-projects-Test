@@ -55,6 +55,7 @@ if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo Melanjutkan untuk mengambil ccache Full
      mkdir -p /tmp/cirrus-ci-build/ccache
      rclone copy NFS:ccache/$DIR/full/ccache.tar.gz /tmp/cirrus-ci-build -P
+     cd /tmp/cirrus-ci-build
      time tar xf ccache.tar.gz
      rm -rf ccache.tar.gz
    fi
