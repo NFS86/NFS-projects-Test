@@ -54,7 +54,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   $BUILD_TYPE -j23 &
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo BUILD OUT FOLDER AKTIF..
-     sleep 80m
+     sleep 30m
      kill %1
      pushout
      ccache -s
