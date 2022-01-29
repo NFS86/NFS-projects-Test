@@ -11,6 +11,7 @@ env:
     CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
 
 task:
+name: Test
   timeout_in: 2h
   only_if: $CIRRUS_BRANCH == "NFS"
   environment:
