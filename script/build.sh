@@ -51,15 +51,16 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   ccache -z
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j23 &
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo BUILD OUT FOLDER AKTIF..
+     $BUILD_TYPE -j23 &
      sleep 30m
      kill %1
      pushout
      ccache -s
      exit 1
   fi
+  $BUILD_TYPE -j23 &
   sleep 95m
   kill %1
   ccache -s

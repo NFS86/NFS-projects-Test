@@ -2,6 +2,7 @@ container:
     image: anggit86/docker:cirrus
     cpu: 8
     memory: 32G
+    use_in_memory_disk: true
     volumes:
           - /tmp/cirrus-ci-build/rom:/tmp/cirrus-ci-build/rom
           - /tmp/cirrus-ci-build/ccache:/tmp/cirrus-ci-build/ccache
@@ -34,8 +35,6 @@ env:
 
 task:
   name: Build
-  alias: Tests
-  os: darwin
   Environment_script: ./script/env.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
@@ -45,3 +44,11 @@ task:
   Build_script: ./script/build.sh
   
   Upload_script: ./script/ziping.sh
+
+task:
+  name: Test
+  depends_on:
+    - Build
+  Environment_script: ./script/env.sh
+
+  Storage-Check_script: df -h && lsblk && ls -l -a -h
