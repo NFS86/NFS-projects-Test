@@ -7,14 +7,6 @@ container:
           - /tmp/cirrus-ci-build/ccache:/tmp/cirrus-ci-build/ccache
 
 env:
-    CIRRUS_CLONE_DEPTH: 1
-    CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
-
-task:
-name: Test
-  timeout_in: 2h
-  only_if: $CIRRUS_BRANCH == "NFS"
-  environment:
     rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
     TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
@@ -39,7 +31,11 @@ name: Test
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
     CIRRUS_CPU: 30
-   
+
+task:
+name: Test
+  timeout_in: 2h
+  only_if: $CIRRUS_BRANCH == "NFS"
   - name: environment
     Environment_script: ./script/env.sh
 
