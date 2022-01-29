@@ -54,7 +54,8 @@ task:
       - ./script/ziping.sh
 
 
-  - name: Build Stage 2
+task:
+  name: Build Stage 2
   timeout_in: 2h
   only_if: $CIRRUS_BRANCH == "NFS"
   depends_on:
