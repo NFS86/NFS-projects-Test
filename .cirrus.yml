@@ -25,7 +25,7 @@ env:
     BUILD_BOOT_ONLY: "false"
     BUILD_CCACHE_ONLY: "true"
     BUILD_FULL: "true"
-    BUILD_OUT_FOLDER: "yes"
+    BUILD_OUT_FOLDER: "no"
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$FULL"
     SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
@@ -46,9 +46,29 @@ task:
   Upload_script: ./script/ziping.sh
 
 task:
-  name: Test
+  name: Build Stage 2
   depends_on:
     - Build
   Environment_script: ./script/env.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
+  
+  Sync_script: ./script/sync.sh
+  
+  Build_script: ./script/build.sh
+  
+  Upload_script: ./script/ziping.sh
+
+task:
+  name: Build Stage 3
+  depends_on:
+    - Build Stage 2
+  Environment_script: ./script/env.sh
+
+  Storage-Check_script: df -h && lsblk && ls -l -a -h
+  
+  Sync_script: ./script/sync.sh
+  
+  Build_script: ./script/build.sh
+  
+  Upload_script: ./script/ziping.sh
