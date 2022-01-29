@@ -35,8 +35,7 @@ env:
 task:
   name: Build
   alias: Tests
-    labels:
-      os: darwin
+  os: darwin
   Environment_script: ./script/env.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
