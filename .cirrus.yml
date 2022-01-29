@@ -34,7 +34,6 @@ env:
 
 task:
 name: Test
-  timeout_in: 2h
   only_if: $CIRRUS_BRANCH == "NFS"
   - name: environment
     Environment_script: ./script/env.sh
