@@ -39,16 +39,20 @@ task:
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
     CIRRUS_CPU: 30
-  Environment_script:
-      - ./script/env.sh
+   
+  matrix:
+  - name: environment
+    Environment_script: ./script/env.sh
 
-  Storage-Check_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-
-  Sync_script:
-      - ./script/sync.sh
+  depends_on:
+    - environment
+  - name: storage
+    Storage-Check_script: df -h && lsblk && ls -l -a -h
+  
+  depends_on:
+    - storage
+  - name: sync
+    Sync_script: ./script/sync.sh
 
 task:
   name: Build Stage 2
