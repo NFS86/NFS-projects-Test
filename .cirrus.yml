@@ -4,6 +4,14 @@ container:
     memory: 32G
 
 env:
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
+
+task:
+  name: Build
+  timeout_in: 2h
+  only_if: $CIRRUS_BRANCH == "NFS"
+  environment:
     rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
     TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
@@ -28,10 +36,54 @@ env:
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
     CIRRUS_CPU: 30
+  Environment_script:
+      - ./script/env.sh
 
-task:
-  name: Build
+  Storage-Check_script:
+      - df -h
+      - lsblk
+      - ls -l -a -h
+
+  Sync_script:
+      - ./script/sync.sh
+
+  Build_script:
+      - ./script/build.sh
+
+  Upload_script:
+      - ./script/ziping.sh
+
+
+name: Build Stage 2
   timeout_in: 2h
+  only_if: $CIRRUS_BRANCH == "NFS"
+  depends_on:
+    - Build
+  environment:
+    rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
+    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
+    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
+    BOOT: make bootimage
+    SYSTEM: make systemimage
+    VENDOR: make vendorimage
+    FULL: make bacon
+    SYSTEM_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/system.img
+    VENDOR_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/vendor.img
+    BOOT_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/boot.img
+    BUILD_VENDOR_ONLY: "false"
+    BUILD_SYSTEM_ONLY: "true"
+    BUILD_BOOT_ONLY: "false"
+    BUILD_CCACHE_ONLY: "true"
+    BUILD_FULL: "false"
+    BUILD_OUT_FOLDER: "no"
+    LUNCH: aosp_rosy-userdebug
+    BUILD_TYPE: "$SYSTEM"
+    SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
+    LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
+    DIR: arcanaos
+    CIRRUS_CPU: 30
   Environment_script:
       - ./script/env.sh
 
