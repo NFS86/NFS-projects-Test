@@ -39,7 +39,6 @@ task:
     DIR: arcanaos
     CIRRUS_CPU: 30
    
-  matrix:
   - name: environment
     Environment_script: ./script/env.sh
 
