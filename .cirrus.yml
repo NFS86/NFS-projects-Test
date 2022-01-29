@@ -33,8 +33,6 @@ env:
     CIRRUS_CPU: 30
 
 task:
-name: Test
-  only_if: $CIRRUS_BRANCH == "NFS"
   - name: environment
     Environment_script: ./script/env.sh
 
