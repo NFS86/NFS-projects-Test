@@ -37,12 +37,16 @@ task:
   name: Build
   timeout_in: 2h
   Environment_script: ./script/env.sh
+  
+  Ccache_set_script: ./script/ccache.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
   
   Sync_script: ./script/sync.sh
   
   Build_script: ./script/build.sh
+  
+  Ccache_info_script: ccache -x && ccache -s
   
   Upload_script: ./script/ziping.sh
 
@@ -52,12 +56,16 @@ task:
   depends_on:
     - Build
   Environment_script: ./script/env.sh
+  
+  Ccache_set_script: ./script/ccache.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
   
   Sync_script: ./script/sync.sh
   
   Build_script: ./script/build.sh
+  
+  Ccache_info_script: ccache -x && ccache -s
   
   Upload_script: ./script/ziping.sh
 
