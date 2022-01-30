@@ -18,7 +18,8 @@ ccache -o inode_cache=true
 ccache -o keep_comments_cpp=true
 ccache -o pch_external_checksum=true
 ccache -o read_only_direct=true
-ccache -o recache=true
+ccache -o read_only=true
+ccache -o recache=false
 ccache - a fast C/C++ compiler cache
 for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
 ccache -z
