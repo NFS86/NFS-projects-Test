@@ -41,14 +41,16 @@ function caceng() {
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-export CCACHE_COMPRESS=true
-export CCACHE_COMPRESSLEVEL=5
-export CCACHE_LIMIT_MULTIPLE=1
 ccache -M 50G
 ccache -F 999999999
-ccache -o compression=true
 ccache - a fast C/C++ compiler cache
 for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
+if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
+   export CCACHE_COMPRESS=true
+   export CCACHE_COMPRESSLEVEL=5
+   export CCACHE_LIMIT_MULTIPLE=1
+   ccache -o compression=true
+fi
 }
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then

@@ -28,6 +28,7 @@ env:
     BUILD_OUT_FOLDER: "no"
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$FULL"
+    CCACHE_DI_COMPRESS: "yes"
     SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos
