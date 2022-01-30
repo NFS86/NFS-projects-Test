@@ -2,7 +2,6 @@ container:
     image: anggit86/docker:cirrus
     cpu: 8
     memory: 32G
-    use_in_memory_disk: true
     volumes:
           - /tmp/cirrus-ci-build/rom:/tmp/cirrus-ci-build/rom
           - /tmp/cirrus-ci-build/ccache:/tmp/cirrus-ci-build/ccache
@@ -36,36 +35,6 @@ env:
 task:
   name: Build
   timeout_in: 2h
-  Environment_script: ./script/env.sh
-
-  Storage-Check_script: df -h && lsblk && ls -l -a -h
-  
-  Sync_script: ./script/sync.sh
-  
-  Build_script: ./script/build.sh
-  
-  Upload_script: ./script/ziping.sh
-
-task:
-  name: Build Stage 2
-  timeout_in: 2h
-  depends_on:
-    - Build
-  Environment_script: ./script/env.sh
-
-  Storage-Check_script: df -h && lsblk && ls -l -a -h
-  
-  Sync_script: ./script/sync.sh
-  
-  Build_script: ./script/build.sh
-  
-  Upload_script: ./script/ziping.sh
-
-task:
-  name: Build Stage 3
-  timeout_in: 2h
-  depends_on:
-    - Build Stage 2
   Environment_script: ./script/env.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
