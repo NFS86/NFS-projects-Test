@@ -38,6 +38,7 @@ rm -rf rosy.tar.gz
 }
 
 function caceng() {
+export ALLOW_MISSING_DEPENDENCIES=true
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
