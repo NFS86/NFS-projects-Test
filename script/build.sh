@@ -37,7 +37,24 @@ rclone copy rosy.tar.gz NFS:ccache/$DIR -P
 rm -rf rosy.tar.gz
 }
 
+function caceng() {
+export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
+export CCACHE_EXEC=$(which ccache)
+export USE_CCACHE=1
+export CCACHE_COMPRESS=true
+export CCACHE_COMPRESSLEVEL=-3
+export CCACHE_LIMIT_MULTIPLE=0.9
+ccache -M 50G
+ccache -F 999999999
+ccache -o compression=true
+ccache - a fast C/C++ compiler cache
+for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
+ccache -z
+}
+
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
+  caceng
   . build/envsetup.sh
   lunch $LUNCH
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
@@ -45,6 +62,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
      $BUILD_TYPE -j23 &
      sleep 30m
      kill %1
+     ccache -x && ccache -s
      pushout
      exit 1
   fi
@@ -54,8 +72,10 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
+  caceng
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE -j23
+  ccache -x && ccache -s
   check
 fi
