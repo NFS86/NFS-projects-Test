@@ -69,6 +69,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   $BUILD_TYPE -j23 &
   sleep 95m
   kill %1
+  ccache -x && ccache -s
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
