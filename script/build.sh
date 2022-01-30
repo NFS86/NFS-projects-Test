@@ -52,6 +52,7 @@ if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
    export CCACHE_LIMIT_MULTIPLE=1
    ccache -o compression=true
 fi
+ccache -z
 }
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
