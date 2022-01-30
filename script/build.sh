@@ -45,6 +45,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   export CCACHE_COMPRESSLEVEL=1
   export CCACHE_LIMIT_MULTIPLE=0.9
   export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+  export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z
@@ -73,6 +74,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   export CCACHE_COMPRESSLEVEL=1
   export CCACHE_LIMIT_MULTIPLE=0.9
   export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+  export CCACHE_CONFIGPATH=/tmp/cirrus-ci-build/ccache/ccache.conf
   ccache -o compression=true
   ccache - a fast C/C++ compiler cache
   ccache -z

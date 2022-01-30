@@ -16,8 +16,7 @@ compression = true
 compression_level = 1
 limit_multiple = 0.9
 EOF
-cd /tmp/cirrus-ci-build/rom
-ls
+cd /tmp/cirrus-ci-build/rom && ls
 }
 
 if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
