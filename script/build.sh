@@ -42,16 +42,16 @@ export ALLOW_MISSING_DEPENDENCIES=true
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-ccache -M 50G
+ccache -M 10G
 ccache -F 999999999
 ccache - a fast C/C++ compiler cache
 for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
 if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
    export CCACHE_COMPRESS=true
    ccache -o compression=true
+   ccache -o recache=true
 fi
 ccache -z
-ccache --extract-result PATH
 }
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then

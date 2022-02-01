@@ -11,10 +11,8 @@ nproc
 gcc --version
 clang --version
 cat > /etc/ccache.conf <<EOF
-max_size = 50.0G
+max_size = 10.0G
 compression = true
-compression_level = 1
-limit_multiple = 0.9
 EOF
 cd /tmp/cirrus-ci-build/rom && ls
 }
