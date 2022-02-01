@@ -1,6 +1,9 @@
 #!/bin/bash
 cd /tmp/cirrus-ci-build/rom
 
+set -e
+set -x
+
 function check() {
 if ! [ -a "$SYSTEM_IMAGE" ]; then
 	checkv
@@ -50,7 +53,6 @@ if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
    export CCACHE_COMPRESS=true
    ccache -o compression=true
 fi
-ccache -o read_only=true
 ccache -z
 }
 
