@@ -49,8 +49,8 @@ for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/loc
 if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
    export CCACHE_COMPRESS=true
    ccache -o compression=true
-   ccache -o recache=true
 fi
+ccache -o read_only=true
 ccache -z
 }
 
