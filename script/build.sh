@@ -51,6 +51,7 @@ if [ "$CCACHE_DI_COMPRESS" == "yes" ]; then
    ccache -o compression=true
 fi
 ccache -z
+ccache --extract-result PATH
 }
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
@@ -59,14 +60,14 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   lunch $LUNCH
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo BUILD OUT FOLDER AKTIF..
-     $BUILD_TYPE -j8 &
+     $BUILD_TYPE -j$(nproc) &
      sleep 30m
      kill %1
      ccache -x && ccache -s
      pushout
      exit 1
   fi
-  $BUILD_TYPE -j8 &
+  $BUILD_TYPE -j$(nproc) &
   sleep 95m
   kill %1
   ccache -x && ccache -s
@@ -76,7 +77,7 @@ if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   caceng
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j8
+  $BUILD_TYPE -j$(nproc)
   ccache -x && ccache -s
   check
 fi
