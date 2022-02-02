@@ -11,7 +11,6 @@ nproc
 gcc --version
 clang --version
 cat > /etc/ccache.conf <<EOF
-max_size = 10.0G
 compression = true
 EOF
 cd /tmp/cirrus-ci-build/rom && ls
@@ -19,11 +18,11 @@ cd /tmp/cirrus-ci-build/rom && ls
 
 if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
    echo use out folder terdeteksi..
-   mkdir -p /tmp/cirrus-ci-build/rom/out/target/product
-   rclone copy NFS:ccache/$DIR/rosy.tar.gz /tmp/cirrus-ci-build/rom/out/target/product -P
-   cd /tmp/cirrus-ci-build/rom/out/target/product
-   time tar xf rosy.tar.gz
-   rm -rf rosy.tar.gz
+   mkdir -p /tmp/cirrus-ci-build/rom
+   rclone copy NFS:ccache/$DIR/out.tar.gz /tmp/cirrus-ci-build/rom -P
+   cd /tmp/cirrus-ci-build/rom
+   time tar xf out.tar.gz
+   rm -rf out.tar.gz
    if [ "$BUILD_SYSTEM_ONLY" == "true" ]; then
      echo Build variant SYSTEM terdeteksi..
      echo Melanjutkan untuk mengambil ccache SYSTEM

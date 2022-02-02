@@ -20,15 +20,15 @@ env:
     SYSTEM_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/system.img
     VENDOR_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/vendor.img
     BOOT_IMAGE: /tmp/cirrus-ci-build/rom/out/target/product/rosy/boot.img
-    BUILD_VENDOR_ONLY: "false"
-    BUILD_SYSTEM_ONLY: "false"
-    BUILD_BOOT_ONLY: "false"
-    BUILD_CCACHE_ONLY: "true"
-    BUILD_FULL: "true"
-    BUILD_OUT_FOLDER: "no"
+    BUILD_VENDOR_ONLY: "false" #true or false
+    BUILD_SYSTEM_ONLY: "false" #true or false
+    BUILD_BOOT_ONLY: "false" #true or false
+    BUILD_CCACHE_ONLY: "true" #true or false
+    BUILD_FULL: "true" #true or false
+    BUILD_OUT_FOLDER: "yes" #yes or no
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: "$FULL"
-    CCACHE_DI_COMPRESS: "yes"
+    CCACHE_DI_COMPRESS: "yes" #yes or no
     SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
     LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
     DIR: arcanaos

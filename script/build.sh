@@ -30,14 +30,14 @@ function finerr() {
 }
 
 function pushout() {
-cd /tmp/cirrus-ci-build/rom/out/target/product
+cd /tmp/cirrus-ci-build/rom
 com ()
 {
     tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
 }
-time com rosy 1
-rclone copy rosy.tar.gz NFS:ccache/$DIR -P
-rm -rf rosy.tar.gz
+time com out 1
+rclone copy out.tar.gz NFS:ccache/$DIR -P
+rm -rf out.tar.gz
 }
 
 function caceng() {
@@ -45,7 +45,7 @@ export ALLOW_MISSING_DEPENDENCIES=true
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-ccache -M 10G
+ccache -M 100G
 ccache -F 999999999
 ccache - a fast C/C++ compiler cache
 for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
@@ -62,7 +62,7 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
      echo BUILD OUT FOLDER AKTIF..
      $BUILD_TYPE -j$(($(nproc --all) + 2)) &
-     sleep 30m
+     sleep 40m
      kill %1
      ccache -x && ccache -s
      pushout
