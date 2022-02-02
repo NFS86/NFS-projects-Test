@@ -8,4 +8,3 @@ com ()
 time com ccache 1
 rclone copy ccache.tar.gz NFS:ccache/$DIR -P
 rm -rf ccache.tar.gz
-}
