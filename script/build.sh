@@ -55,19 +55,23 @@ fi
 ccache -z
 }
 
+if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
+  caceng
+  . build/envsetup.sh
+  lunch $LUNCH
+  echo BUILD OUT FOLDER AKTIF..
+  $BUILD_TYPE -j$(($(nproc --all) + 2)) &
+  sleep 40m
+  kill %1
+  ccache -x && ccache -s
+  pushout
+  exit 1
+fi
+
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   caceng
   . build/envsetup.sh
   lunch $LUNCH
-  if [ "$BUILD_OUT_FOLDER" == "yes" ]; then
-     echo BUILD OUT FOLDER AKTIF..
-     $BUILD_TYPE -j$(($(nproc --all) + 2)) &
-     sleep 40m
-     kill %1
-     ccache -x && ccache -s
-     pushout
-     exit 1
-  fi
   $BUILD_TYPE -j$(($(nproc --all) + 2)) &
   sleep 95m
   kill %1
