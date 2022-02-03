@@ -9,7 +9,6 @@ export CCACHE_COMPRESS=true
 ccache -M 0
 ccache -F 0
 ccache - a fast C/C++ compiler cache
-for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done   
 ccache -z
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then

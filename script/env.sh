@@ -15,4 +15,9 @@ clang --version
 cat > /etc/ccache.conf <<EOF
 compression = true
 EOF
+for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done   
+update-ccache-symlinks
+dpkg -l ccache 
+echo export PATH="/usr/lib/ccache:$PATH"
+which ccache gcc g++ cc c++ clang clang++
 cd /tmp/cirrus-ci-build/rom && ls
