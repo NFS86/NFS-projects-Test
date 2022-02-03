@@ -9,13 +9,11 @@ export CCACHE_COMPRESS=true
 ccache -M 0
 ccache -F 0
 ccache - a fast C/C++ compiler cache
-ccache -C && ccache -z
+ccache -c && ccache -z
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j8 &
-  sleep 40m
   $BUILD_TYPE -j8 &
   sleep 95m
   kill %1

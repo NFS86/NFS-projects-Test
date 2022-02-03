@@ -30,6 +30,6 @@ task:
   
   Sync_script: ./script/sync.sh
   
-  Build_script: CC=clang CFLAGS= CXX=clang++ CXXFLAGS= ./script/build.sh
+  Build_script: ./script/build.sh
   
   Upload_script: ./script/ziping.sh
