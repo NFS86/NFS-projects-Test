@@ -1,9 +1,6 @@
 #!/bin/bash
 cd /tmp/cirrus-ci-build/rom
 
-set -e
-set -x
-
 export ALLOW_MISSING_DEPENDENCIES=true
 export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
@@ -18,7 +15,7 @@ ccache -z
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j$(($(nproc --all) + 2)) &
+  $BUILD_TYPE -j10 &
   sleep 95m
   kill %1
   ccache -x && ccache -s
@@ -27,6 +24,6 @@ fi
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   . build/envsetup.sh
   lunch $LUNCH
-  $BUILD_TYPE -j$(($(nproc --all) + 2))
+  $BUILD_TYPE -j10
   ccache -x && ccache -s
 fi
