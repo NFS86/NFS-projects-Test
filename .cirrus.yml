@@ -14,6 +14,8 @@ env:
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
     BUILD_CCACHE_ONLY: "false" #true or false
+    device: rosy
+    rom_name: PixelExperience
     LUNCH: aosp_rosy-userdebug
     BUILD_TYPE: mka bacon
     SYNC: https://github.com/PixelExperience/manifest -b eleven
