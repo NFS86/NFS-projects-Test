@@ -12,5 +12,5 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
-   rclone copy /tmp/cirrus-ci-build/and out/target/product/$device/$rom_name_$device*.zip NFS:rom/$DIR -P
+   rclone copy /tmp/cirrus-ci-build/out/target/product/$device/$(rom_name)_$(device)*.zip NFS:rom/$DIR -P
 fi
