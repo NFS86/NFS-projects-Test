@@ -25,7 +25,7 @@ env:
 
 task:
   name: Build
-  timeout_in: 2h
+  timeout_in: 150m
   Environment_script: ./script/env.sh
 
   Storage-Check_script: df -h && lsblk && ls -l -a -h
