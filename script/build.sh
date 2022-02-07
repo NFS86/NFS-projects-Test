@@ -17,12 +17,12 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
   $BUILD_TYPE -j8 &
   sleep 95m
   kill %1
-  ccache -x && ccache -s
+  ccache -s
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
   . build/envsetup.sh
   lunch $LUNCH
   $BUILD_TYPE -j8
-  ccache -x && ccache -s
+  ccache -s
 fi
