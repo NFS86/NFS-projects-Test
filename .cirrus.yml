@@ -13,14 +13,14 @@ env:
     TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
-    BUILD_CCACHE_ONLY: "false" #true or false
+    BUILD_CCACHE_ONLY: "true" #true or false
     device: rosy
-    rom_name: PixelExperience
+    rom_name: ProjectArcana
     LUNCH: aosp_rosy-userdebug
-    BUILD_TYPE: mka bacon
-    SYNC: https://github.com/PixelExperience/manifest -b eleven
-    LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b PE-11
-    DIR: PE-11
+    BUILD_TYPE: make bacon
+    SYNC: https://github.com/projectarcana-aosp/manifest -b 12.x
+    LOCAL_MANIFEST: https://github.com/NFS-projects/local_manifest -b arcana-12
+    DIR: arcanaos
     CIRRUS_CPU: 30
 
 task:
