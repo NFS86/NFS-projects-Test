@@ -2,6 +2,8 @@
 
 cd /home/cirrus-ci-build
 mkdir -p ~/.config/rclone
+mkdir -p rom
+mkdir -p ccache
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
 mkdir -p /home/cirrus-ci-build/ccache
 rclone copy NFS:ccache/$DIR/ccache.tar.gz /home/cirrus-ci-build -P
