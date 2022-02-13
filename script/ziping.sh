@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
-   cd /tmp/cirrus-ci-build
+   cd /home/cirrus-ci-build
    com ()
    {
        tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
@@ -12,6 +12,6 @@ if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
 fi
 
 if [ "$BUILD_CCACHE_ONLY" == "false" ]; then
-   cd /tmp/cirrus-ci-build/rom/out/target/product/$device
+   cd /home/cirrus-ci-build/rom/out/target/product/$device
    rclone copy $rom_name*.zip NFS:rom/$DIR -P
 fi

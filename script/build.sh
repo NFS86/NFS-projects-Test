@@ -1,8 +1,8 @@
 #!/bin/bash
-cd /tmp/cirrus-ci-build/rom
+cd /home/cirrus-ci-build/rom
 
 export ALLOW_MISSING_DEPENDENCIES=true
-export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+export CCACHE_DIR=/home/cirrus-ci-build/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
 export CCACHE_COMPRESS=true

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cd /tmp/cirrus-ci-build
+cd /home/cirrus-ci-build
 mkdir -p ~/.config/rclone
 echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
-mkdir -p /tmp/cirrus-ci-build/ccache
-rclone copy NFS:ccache/$DIR/ccache.tar.gz /tmp/cirrus-ci-build -P
+mkdir -p /home/cirrus-ci-build/ccache
+rclone copy NFS:ccache/$DIR/ccache.tar.gz /home/cirrus-ci-build -P
 time tar xf ccache.tar.gz
 rm -rf ccache.tar.gz
 cat /etc/os*
@@ -20,4 +20,4 @@ update-ccache-symlinks
 dpkg -l ccache 
 echo export PATH="/usr/lib/ccache:$PATH"
 which ccache gcc g++ cc c++ clang clang++
-cd /tmp/cirrus-ci-build/rom && ls
+cd /home/cirrus-ci-build/rom && ls
