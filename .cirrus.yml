@@ -1,14 +1,13 @@
 env:
     BUILD_HOSTNAME: "nfs-project"
     rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
-    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
-    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: /home/cirrus-ci-build
     BUILD_CCACHE_ONLY: "true" #true or false
     device: rosy
     LUNCH: evolution_rosy-userdebug
     BUILD_TYPE: mka evolution
+    CIRRUS_CPU: "ENCRYPTED[5e18d0291e93af72d2d53d90d6c959a838b0aeda2bf400950df23f10af38347517d431a5865282278a7f164479d87c4d]"
     
 task:
   name: Test Build Rom
