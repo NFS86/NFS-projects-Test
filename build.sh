@@ -1,5 +1,6 @@
 #!/bin/bash
 
+name_rom=$(grep init $CIRRUS_WORKING_DIR/sync.sh -m 1 | cut -d / -f 4)
 cd $CIRRUS_WORKING_DIR/rom/$name_rom
 export ALLOW_MISSING_DEPENDENCIES=true
 export CCACHE_DIR=/home/cirrus-ci-build/ccache

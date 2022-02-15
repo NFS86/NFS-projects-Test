@@ -9,7 +9,6 @@ env:
     device: rosy
     LUNCH: evolution_rosy-userdebug
     BUILD_TYPE: mka evolution
-    name_rom: $(grep init $CIRRUS_WORKING_DIR/sync.sh -m 1 | cut -d / -f 4)
     
 task:
   name: Test Build Rom
@@ -30,6 +29,7 @@ task:
      - df -h && lsblk && ls -l -a -h
   Sync_rom_script:
      - set -exv
+     - name_rom=$(grep init $CIRRUS_WORKING_DIR/sync.sh -m 1 | cut -d / -f 4)
      - mkdir -p $CIRRUS_WORKING_DIR/rom/$name_rom
      - cd $CIRRUS_WORKING_DIR/rom/$name_rom
      - rm -rf .repo/local_manifests

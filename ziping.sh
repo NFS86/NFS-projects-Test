@@ -1,5 +1,6 @@
 #!/bin/bash
 
+name_rom=$(grep init $CIRRUS_WORKING_DIR/sync.sh -m 1 | cut -d / -f 4)
 if [ "$BUILD_CCACHE_ONLY" == "true" ]; then
    cd /home/cirrus-ci-build
    com ()
