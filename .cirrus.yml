@@ -1,99 +1,41 @@
 env:
-    rcloneconfig: "ENCRYPTED[81f2ea42a1bb72f5514f01604e25bb9057eb0b6f1b0f5a18434dd7175df07619a880e75ecb9597e10e69fba44553fe84]"
-    tokentl: "ENCRYPTED[635e0f6a0eba8b826946060570abec570da283211dd3be25ba50ff895855fd6f35aa1181acdbbb20ec3331f16cde6bbd]"
-    idtl: "ENCRYPTED[34e83ce99a26a43722c25a9237e72beb606357204ef3029e5fe641f449ebd90db2ae3b7a2676bf686c62ffa9606f48db]"
-
+    BUILD_HOSTNAME: "nfs-project"
+    rcloneconfig: "ENCRYPTED[8bba78e2d6cba57a09a1077fd890dd9896da6e24278b8ff19f5c83b99a4054e7fea40bab5b39728acf306634acaad136]"
+    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
+    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: /home/cirrus-ci-build
+    BUILD_CCACHE_ONLY: "true" #true or false
+    device: rosy
+    LUNCH: evolution_rosy-userdebug
+    BUILD_TYPE: mka evolution
+    name_rom: $(grep init $CIRRUS_WORKING_DIR/sync.sh -m 1 | cut -d / -f 4)
+    
 task:
-  name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 480m  
+  name: Test Build Rom
+  timeout_in: 120m
   container:
-      image: inok2341/anu:latest
-      cpu: 8
-      memory: 32G
-        
-  Build-Env-Setup_background_script:
-       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Setup Build"
-       - export DEBIAN_FRONTEND=noninteractive
-       - apt update
-       - apt install sudo
-       - mkdir -p ~/.config/rclone
-       - echo "$rcloneconfig" > ~/.config/rclone/rclone.conf
-       - DEBIAN_FRONTEND=noninteractive
-       - sudo apt install python3 -y
-       - sudo ln -sf /usr/bin/python3 /usr/bin/python
-       - git config --global user.name "I-n-o-k"
-       - git config --global user.email "inok.dr189@gmail.com"
-       - mkdir -p /tmp/ccache
-       - rclone copy inok:nusantara/ccache.tar.gz /tmp -P
-       - cd /tmp
-       - time tar xf ccache.tar.gz
-       - cd /tmp
+    image: anggit86/docker:cirrus
+    cpu: 8
+    memory: 32G
+    volumes:
+          - /home/cirrus-ci-build/rom:/home/cirrus-ci-build/rom
+          - /home/cirrus-ci-build/ccache:/home/cirrus-ci-build/ccache
   
-  Storage-Checker_background_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-  
-  Sync_script:
-      - echo "============================"
-      - echo "Syncing The Sources..."
-      - echo "============================"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
-      - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/NusantaraProject-ROM/android_manifest -b 11 -g default,-device,-mips,-darwin,-notdefault
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      # DT/VT/KT/TC
-      - git clone --depth=1 https://github.com/I-n-o-k/device_xiaomi_juice -b anu device/xiaomi/juice
-      - git clone --depth=1 https://gitlab.com/I-n-o-k/vendor-lime --single-branch -b 11ABT vendor/xiaomi/juice
-      - git clone --depth=1 https://github.com/I-n-o-k/android_kernel_xiaomi_bengal --single-branch -b 11.0 kernel/xiaomi/juice
-      # HALS
-      - rm -rf hardware/qcom-caf/sm8250/audio
-      - rm -rf hardware/qcom-caf/sm8250/display
-      - rm -rf hardware/qcom-caf/sm8250/media
-      - rm -rf external/json-c
-      - git clone --depth=1 https://github.com/I-n-o-k/hardware_qcom-caf_sm8250_audio hardware/qcom-caf/sm8250/audio
-      - git clone --depth=1 https://github.com/I-n-o-k/hardware_qcom-caf_sm8250_display hardware/qcom-caf/sm8250/display
-      - git clone --depth=1 https://github.com/I-n-o-k/hardware_qcom-caf_sm8250_media hardware/qcom-caf/sm8250/media
-      - git clone --depth=1 https://github.com/LineageOS/android_external_json-c -b lineage-18.1 external/json-c
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
-      - echo "============================"
-      - echo "Sync Completed!"
-      - echo "============================"
-
-  Build_script:
-      - echo "============================"
-      - echo "Starting the Build..."
-      - echo "============================"
-      - cd /tmp/rom
-      - export CCACHE_DIR=/tmp/ccache
-      - export CCACHE_EXEC=$(which ccache)
-      - export USE_CCACHE=1
-      - ccache -M 20G
-      - ccache -o compression=true
-      - ccache -z
-      - source build/envsetup.sh > /dev/null 2>&1
-      - lunch nad_juice-userdebug > /dev/null 2>&1
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="$(echo "${var_cache_report_config}")"
-      - make nad -j$(nproc --all)
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls Nusantara*.zip) Completed!"
-      - echo "============================"
-      - echo "Build Completed!"
-      - echo "============================"
-
-  Upload_script:
-      - echo "============================"
-      - echo "Uploading the Build...."
-      - echo "============================"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/juice/ && ls Nusantara*.zip)"
-      - rclone copy /tmp/rom/out/target/product/juice/Nusantara*.zip inok:juice -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/juice/ && ls Nusantara*.zip) Uploaded Successfully!"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Download link http://anu.inok189.workers.dev/juice/$(cd /tmp/rom/out/target/product/juice/ && ls Nusantara*.zip)"
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-      - ./ziping.sh
-      - cd /tmp
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz inok:nusantara -P
-      - echo " "
-      - echo "============================"
-      - echo "Build Uploaded Successfully!"
-      - echo "============================"
+  Load_script:
+     - ./load.sh
+  Environment_script:
+     - cat /etc/os* && env && nproc && gcc --version && clang --version
+  Storage-Check_script:
+     - df -h && lsblk && ls -l -a -h
+  Sync_rom_script:
+     - set -exv
+     - mkdir -p $CIRRUS_WORKING_DIR/rom/$name_rom
+     - cd $CIRRUS_WORKING_DIR/rom/$name_rom
+     - rm -rf .repo/local_manifests
+     - command=$(head $CIRRUS_WORKING_DIR/sync.sh -n $(expr $(grep 'build/envsetup.sh' $CIRRUS_WORKING_DIR/sync.sh -n | cut -f1 -d:) - 1))
+     - bash -c "$command" || true
+  Build_rom_script:
+     - ./build.sh
+  Upload_build_script:
+     - ./ziping.sh
