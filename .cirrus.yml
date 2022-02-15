@@ -37,7 +37,9 @@ task:
      - cd $CIRRUS_WORKING_DIR/rom/$name_rom
      - rm -rf .repo/local_manifests
      - command=$(head $CIRRUS_WORKING_DIR/sync.sh -n $(expr $(grep 'build/envsetup.sh' $CIRRUS_WORKING_DIR/sync.sh -n | cut -f1 -d:) - 1))
+     - only_sync=$(grep 'repo sync' $CIRRUS_WORKING_DIR/sync.sh)
      - bash -c "$command" || true
+     
      - curl -sO https://api.cirrus-ci.com/v1/task/$CIRRUS_TASK_ID/logs/sync.log
      - a=$(grep 'Cannot remove project' sync.log -m1|| true)
      - b=$(grep "^fatal: remove-project element specifies non-existent project" sync.log -m1 || true)
